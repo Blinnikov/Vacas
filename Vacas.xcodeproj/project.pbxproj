@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		78740375277A205800576267 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78740374277A205800576267 /* CalendarView.swift */; };
 		78740377277A206E00576267 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78740376277A206E00576267 /* SettingsView.swift */; };
+		7874037B277B723F00576267 /* CalendarDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7874037A277B723F00576267 /* CalendarDatePicker.swift */; };
 		78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CDD84D2773D0430037D098 /* VacasApp.swift */; };
 		78CDD8502773D0430037D098 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CDD84F2773D0430037D098 /* ContentView.swift */; };
 		78CDD8522773D0440037D098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CDD8512773D0440037D098 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		78740374277A205800576267 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		78740376277A206E00576267 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7874037A277B723F00576267 /* CalendarDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDatePicker.swift; sourceTree = "<group>"; };
 		78CDD84A2773D0430037D098 /* Vacas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vacas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CDD84D2773D0430037D098 /* VacasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacasApp.swift; sourceTree = "<group>"; };
 		78CDD84F2773D0430037D098 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +38,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78740378277B715700576267 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		78740379277B716400576267 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				78740374277A205800576267 /* CalendarView.swift */,
+				78CDD84F2773D0430037D098 /* ContentView.swift */,
+				78740376277A206E00576267 /* SettingsView.swift */,
+				7874037A277B723F00576267 /* CalendarDatePicker.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		78CDD8412773D0430037D098 = {
 			isa = PBXGroup;
 			children = (
@@ -55,10 +75,9 @@
 		78CDD84C2773D0430037D098 /* Vacas */ = {
 			isa = PBXGroup;
 			children = (
+				78740378277B715700576267 /* Model */,
+				78740379277B716400576267 /* Views */,
 				78CDD84D2773D0430037D098 /* VacasApp.swift */,
-				78740374277A205800576267 /* CalendarView.swift */,
-				78CDD84F2773D0430037D098 /* ContentView.swift */,
-				78740376277A206E00576267 /* SettingsView.swift */,
 				78CDD8512773D0440037D098 /* Assets.xcassets */,
 				78CDD8532773D0440037D098 /* Preview Content */,
 			);
@@ -144,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78CDD8502773D0430037D098 /* ContentView.swift in Sources */,
+				7874037B277B723F00576267 /* CalendarDatePicker.swift in Sources */,
 				78740377277A206E00576267 /* SettingsView.swift in Sources */,
 				78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */,
 				78740375277A205800576267 /* CalendarView.swift in Sources */,
