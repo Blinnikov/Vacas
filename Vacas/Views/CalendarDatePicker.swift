@@ -71,13 +71,7 @@ struct CalendarDatePicker: View {
                 .padding(.horizontal, 8)
                 .opacity(isSameDay(date1: value.date, date2: selectedDate) ? 1 : 0)
             )
-            .overlay(
-              Circle()
-                .stroke(.red, lineWidth: 2)
-                .padding(.horizontal, 8)
-                .padding(.bottom, 16)
-                .opacity(opacity(for: value.date))
-            )
+            .overlay(selectionOverlay(for: value.date))
             .onTapGesture {
               selectedDate = value.date
             }
@@ -86,6 +80,25 @@ struct CalendarDatePicker: View {
     }
     .onChange(of: selectedMonthOffset) { newValue in
       currentDate = theSameDateAsNowForCurrentlySelectedMonthOffset()
+    }
+  }
+  
+  func selectionOverlay(for date: Date) -> some View {
+    GeometryReader { geometryProxy in
+      VStack {
+        HStack {
+          Spacer(minLength: 0)
+          Circle()
+            .stroke(.red, lineWidth: 2)
+            .frame(width: geometryProxy.size.width - 12) // maybe 8
+            .offset(y: -4)
+          //                  .padding(.horizontal, 8)
+          //                  .padding(.bottom, 16)
+          .opacity(opacity(for: date))
+          Spacer(minLength: 0)
+        }
+        Spacer()
+      }
     }
   }
   
