@@ -13,22 +13,21 @@ struct CalendarDatePicker: View {
   // TODO: date formatters - Mon vs Monday vs M ?
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   
-  @Binding var currentDate: Date
-  @State var currentMonth = 0
+  @Binding var selectedDate: Date
+  @State private var currentDate = Date()
+  @State private var selectedMonthOffset = 0
   
   var body: some View {
-    let dates = Date().getAllDates()
-    let extracted = extractDate()
     VStack(spacing: 35) {
       // Month switcher
       // TODO: Extract as headline view?
       HStack(spacing: 20) {
         VStack(alignment: .leading, spacing: 10) {
-          Text(extractYearAndMonth()[0])
+          Text(currentYearString)
             .font(.caption)
             .fontWeight(.semibold)
           
-          Text(extractYearAndMonth()[1])
+          Text(currentMonthName)
             .font(.title.bold())
         }
         
@@ -36,14 +35,14 @@ struct CalendarDatePicker: View {
         
         Button {
           withAnimation {
-            currentMonth -= 1
+            selectedMonthOffset -= 1
           }
         } label: {
           Image(systemName: "chevron.left")
         }
         Button {
           withAnimation {
-            currentMonth += 1
+            selectedMonthOffset += 1
           }
         } label: {
           Image(systemName: "chevron.right")
@@ -70,16 +69,23 @@ struct CalendarDatePicker: View {
               Capsule()
                 .fill(Color("Pink"))
                 .padding(.horizontal, 8)
-                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1 : 0)
+                .opacity(isSameDay(date1: value.date, date2: selectedDate) ? 1 : 0)
+            )
+            .overlay(
+              Circle()
+                .stroke(.red, lineWidth: 2)
+                .padding(.horizontal, 8)
+                .padding(.bottom, 16)
+                .opacity(opacity(for: value.date))
             )
             .onTapGesture {
-              currentDate = value.date
+              selectedDate = value.date
             }
         }
       }
     }
-    .onChange(of: currentMonth) { newValue in
-      currentDate = getCurrentMont()
+    .onChange(of: selectedMonthOffset) { newValue in
+      currentDate = theSameDateAsNowForCurrentlySelectedMonthOffset()
     }
   }
   
@@ -88,7 +94,7 @@ struct CalendarDatePicker: View {
       if value.day != -1 {
         Text("\(value.day)")
           .font(.title3.bold())
-          .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+          .foregroundColor(isSameDay(date1: value.date, date2: selectedDate) ? .white : .primary)
           .frame(maxWidth: .infinity)
         
         Spacer()
@@ -98,35 +104,57 @@ struct CalendarDatePicker: View {
     .frame(height: 60, alignment: .top)
   }
   
+  func opacity(for date: Date) -> Double {
+    isSameDay(date1: date, date2: currentDate) &&
+    !isSameDay(date1: date, date2: selectedDate)
+      ? 1
+      : 0
+  }
+  
   func isSameDay(date1: Date, date2: Date) -> Bool {
     let calendar = Calendar.current
     return calendar.isDate(date1, inSameDayAs: date2)
   }
   
-  func extractYearAndMonth() -> [String] {
+  var currentYearString: String {
     let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY MMMM"
-    
-    let date = formatter.string(from: currentDate)
-    return date.components(separatedBy: " ")
+    formatter.dateFormat = "YYYY"
+    return formatter.string(from: currentDate)
   }
   
-  func getCurrentMont() -> Date {
+  var currentMonthName: String {
+    let formatter = DateFormatter()
+    // MMMM - декабря
+    // LLLL - декабрь
+    formatter.dateFormat = "LLLL"
+//    formatter.locale = Locale(identifier: "en-US")
+    
+    return formatter.string(from: currentDate)
+  }
+  
+  func theSameDay(as date: Date, for monthOffset: Int) -> Date {
+    print("Date() - \(Date())")
+    print("Date().localDate() \(Date().localDate())")
     let calendar = Calendar.current
-    guard let currentMonth = calendar.date(byAdding: .month, value: self.currentMonth, to: Date()) else {
+    guard let currentMonth = calendar.date(byAdding: .month, value: monthOffset, to: date) else {
       return Date()
     }
     
     return currentMonth
   }
   
+  func theSameDateAsNowForCurrentlySelectedMonthOffset() -> Date {
+    let now = Date() // TODO: use .localDate()
+    return theSameDay(as: now, for: self.selectedMonthOffset)
+  }
+  
   func extractDate() -> [DateValue] {
     let calendar = Calendar.current
-    let currentMonth = getCurrentMont()
+    let todayInSelectedMonth = theSameDateAsNowForCurrentlySelectedMonthOffset()
     
-    print("Current month: \(currentMonth)")
+    print("Current month: \(todayInSelectedMonth)")
     
-    var days = currentMonth.getAllDates().compactMap { date -> DateValue in
+    var days = todayInSelectedMonth.allDaysOfMonth().compactMap { date -> DateValue in
       let day = calendar.component(.day, from: date)
       return DateValue(day: day, date: date)
     }
@@ -145,6 +173,6 @@ struct CalendarDatePicker: View {
 
 struct CalendarDatePicker_Previews: PreviewProvider {
   static var previews: some View {
-    CalendarDatePicker(currentDate: Binding.constant(Date()))
+    CalendarDatePicker(selectedDate: Binding.constant(Date()))
   }
 }

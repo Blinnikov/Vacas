@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct CalendarView: View {
-  @State var currentDate = Date()
+  @State var selection = Date()
   
   var body: some View {
     ScrollView(.vertical, showsIndicators: false) {
       VStack(spacing: 20) {
-        CalendarDatePicker(currentDate: $currentDate)
+        CalendarDatePicker(selectedDate: $selection)
       }
     }
   }
