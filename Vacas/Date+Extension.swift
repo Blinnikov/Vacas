@@ -8,19 +8,25 @@
 import Foundation
 
 extension Date {
-  func getAllDates() -> [Date] {
+  func localDate() -> Date {
     let calendar = Calendar.current
-    let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!
-    print("Start date: \(startDate)")
-    let range = calendar.range(of: .day, in: .month, for: startDate)!
+    let utc = self
+    let timeZoneOffset = Double(TimeZone.current.secondsFromGMT(for: utc))
+    guard let localDate = calendar.date(byAdding: .second, value: Int(timeZoneOffset), to: utc) else {
+      return self
+    }
     
-    print(range)
+    return localDate
+  }
+  
+  func allDaysOfMonth() -> [Date] {
+    let calendar = Calendar.current
+    let startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: self))!.localDate()
+    let range = calendar.range(of: .day, in: .month, for: startDate)!
     
     let result = range.compactMap { day -> Date in
       return calendar.date(byAdding: .day, value: day == 1 ? 0 : day - 1, to: startDate)!
     }
-    
-    print(result)
     return result
   }
 }

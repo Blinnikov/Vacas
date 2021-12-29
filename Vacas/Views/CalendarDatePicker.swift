@@ -12,6 +12,7 @@ struct CalendarDatePicker: View {
   // TODO: support localization - I do not only want these day names to be in English
   // TODO: date formatters - Mon vs Monday vs M ?
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  let today = Date()
   
   @Binding var selectedDate: Date
   @State private var currentDate = Date()
@@ -63,11 +64,11 @@ struct CalendarDatePicker: View {
       // Day numbers
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
-        ForEach(extractDate()) { value in
+        ForEach(allDaysOfSelectedMonth()) { value in
           CardView(value: value)
             .background(
               Capsule()
-                .fill(Color("Pink"))
+                .fill(Color.selection)
                 .padding(.horizontal, 8)
                 .opacity(isSameDay(date1: value.date, date2: selectedDate) ? 1 : 0)
             )
@@ -88,10 +89,10 @@ struct CalendarDatePicker: View {
       HStack {
         Spacer(minLength: 0)
         Circle()
-          .stroke(Color("Pink"), lineWidth: 2)
+          .stroke(Color.selection, lineWidth: 2)
           .frame(width: DrawingConstants.selectedDayFrameWidth)
           .offset(y: DrawingConstants.selectedDayFrameOffset)
-        .opacity(opacity(for: date))
+          .opacity(opacity(for: date))
         Spacer(minLength: 0)
       }
       Spacer()
@@ -114,7 +115,7 @@ struct CalendarDatePicker: View {
   }
   
   func opacity(for date: Date) -> Double {
-    isSameDay(date1: date, date2: currentDate) &&
+    isSameDay(date1: date, date2: today) &&
     !isSameDay(date1: date, date2: selectedDate)
       ? 1
       : 0
@@ -127,7 +128,9 @@ struct CalendarDatePicker: View {
   
   var currentYearString: String {
     let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY"
+    // YYYY - shows 2022 in December 2021
+    // yyyy - shows 2021 in December 2021
+    formatter.dateFormat = "yyyy"
     return formatter.string(from: currentDate)
   }
   
@@ -142,33 +145,27 @@ struct CalendarDatePicker: View {
   }
   
   func theSameDay(as date: Date, for monthOffset: Int) -> Date {
-    print("Date() - \(Date())")
-    print("Date().localDate() \(Date().localDate())")
     let calendar = Calendar.current
-    guard let currentMonth = calendar.date(byAdding: .month, value: monthOffset, to: date) else {
+    guard let result = calendar.date(byAdding: .month, value: monthOffset, to: date) else {
       return Date()
     }
     
-    return currentMonth
+    return result
   }
   
   func theSameDateAsNowForCurrentlySelectedMonthOffset() -> Date {
-    let now = Date() // TODO: use .localDate()
+    let now = Date().localDate()
     return theSameDay(as: now, for: self.selectedMonthOffset)
   }
   
-  func extractDate() -> [DateValue] {
+  func allDaysOfSelectedMonth() -> [DateValue] {
     let calendar = Calendar.current
     let todayInSelectedMonth = theSameDateAsNowForCurrentlySelectedMonthOffset()
-    
-    print("Current month: \(todayInSelectedMonth)")
     
     var days = todayInSelectedMonth.allDaysOfMonth().compactMap { date -> DateValue in
       let day = calendar.component(.day, from: date)
       return DateValue(day: day, date: date)
     }
-    
-    print(days)
     
     let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
     
