@@ -84,21 +84,17 @@ struct CalendarDatePicker: View {
   }
   
   func selectionOverlay(for date: Date) -> some View {
-    GeometryReader { geometryProxy in
-      VStack {
-        HStack {
-          Spacer(minLength: 0)
-          Circle()
-            .stroke(.red, lineWidth: 2)
-            .frame(width: geometryProxy.size.width - 12) // maybe 8
-            .offset(y: -4)
-          //                  .padding(.horizontal, 8)
-          //                  .padding(.bottom, 16)
-          .opacity(opacity(for: date))
-          Spacer(minLength: 0)
-        }
-        Spacer()
+    VStack {
+      HStack {
+        Spacer(minLength: 0)
+        Circle()
+          .stroke(Color("Pink"), lineWidth: 2)
+          .frame(width: DrawingConstants.selectedDayFrameWidth)
+          .offset(y: DrawingConstants.selectedDayFrameOffset)
+        .opacity(opacity(for: date))
+        Spacer(minLength: 0)
       }
+      Spacer()
     }
   }
   
@@ -181,6 +177,11 @@ struct CalendarDatePicker: View {
     }
     
     return days
+  }
+  
+  struct DrawingConstants {
+    static let selectedDayFrameWidth: CGFloat = 38
+    static let selectedDayFrameOffset: CGFloat = -5
   }
 }
 
