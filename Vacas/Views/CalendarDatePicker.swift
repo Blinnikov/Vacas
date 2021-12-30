@@ -154,7 +154,7 @@ struct CalendarDatePicker: View {
   }
   
   func theSameDateAsNowForCurrentlySelectedMonthOffset() -> Date {
-    let now = Date().localDate()
+    let now = Date()
     return theSameDay(as: now, for: self.selectedMonthOffset)
   }
   
