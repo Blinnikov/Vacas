@@ -24,11 +24,11 @@ struct CalendarDatePicker: View {
       // TODO: Extract as headline view?
       HStack(spacing: 20) {
         VStack(alignment: .leading, spacing: 10) {
-          Text(currentYearString)
+          Text(self.currentDate.yearString)
             .font(.caption)
             .fontWeight(.semibold)
           
-          Text(currentMonthName)
+          Text(self.currentDate.monthString)
             .font(.title.bold())
         }
         
@@ -64,27 +64,30 @@ struct CalendarDatePicker: View {
       // Day numbers
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
-        ForEach(allDaysOfSelectedMonth()) { value in
-          CardView(value: value)
+        ForEach(allDaysOfSelectedMonth()) { pair in
+          CardView(day: pair.day, date: pair.date)
             .background(
               Capsule()
                 .fill(Color.selection)
                 .padding(.horizontal, 8)
-                .opacity(isSameDay(date1: value.date, date2: selectedDate) ? 1 : 0)
+                .opacity(pair.date != nil && pair.date!.inSameDayAs(selectedDate) ? 1 : 0)
             )
-            .overlay(selectionOverlay(for: value.date))
+            .overlay(selectionOverlay(for: pair.date))
             .onTapGesture {
-              selectedDate = value.date
+              if pair.date == nil {
+                return
+              }
+              selectedDate = pair.date!
             }
         }
       }
     }
-    .onChange(of: selectedMonthOffset) { newValue in
-      currentDate = theSameDateAsNowForCurrentlySelectedMonthOffset()
+    .onChange(of: selectedMonthOffset) { _ in
+      currentDate = theSameDateAsNowInSelectedMonth()
     }
   }
   
-  func selectionOverlay(for date: Date) -> some View {
+  func selectionOverlay(for date: Date?) -> some View {
     VStack {
       HStack {
         Spacer(minLength: 0)
@@ -99,12 +102,12 @@ struct CalendarDatePicker: View {
     }
   }
   
-  func CardView(value: DateValue) -> some View {
+  func CardView(day: Int, date: Date?) -> some View {
     VStack {
-      if value.day != -1 {
-        Text("\(value.day)")
+      if let date = date {
+        Text("\(day)")
           .font(.title3.bold())
-          .foregroundColor(isSameDay(date1: value.date, date2: selectedDate) ? .white : .primary)
+          .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
           .frame(maxWidth: .infinity)
         
         Spacer()
@@ -114,63 +117,30 @@ struct CalendarDatePicker: View {
     .frame(height: 60, alignment: .top)
   }
   
-  func opacity(for date: Date) -> Double {
-    isSameDay(date1: date, date2: today) &&
-    !isSameDay(date1: date, date2: selectedDate)
-      ? 1
-      : 0
-  }
-  
-  func isSameDay(date1: Date, date2: Date) -> Bool {
-    let calendar = Calendar.current
-    return calendar.isDate(date1, inSameDayAs: date2)
-  }
-  
-  var currentYearString: String {
-    let formatter = DateFormatter()
-    // YYYY - shows 2022 in December 2021
-    // yyyy - shows 2021 in December 2021
-    formatter.dateFormat = "yyyy"
-    return formatter.string(from: currentDate)
-  }
-  
-  var currentMonthName: String {
-    let formatter = DateFormatter()
-    // MMMM - декабря
-    // LLLL - декабрь
-    formatter.dateFormat = "LLLL"
-//    formatter.locale = Locale(identifier: "en-US")
-    
-    return formatter.string(from: currentDate)
-  }
-  
-  func theSameDay(as date: Date, for monthOffset: Int) -> Date {
-    let calendar = Calendar.current
-    guard let result = calendar.date(byAdding: .month, value: monthOffset, to: date) else {
-      return Date()
+  func opacity(for date: Date?) -> Double {
+    guard let date = date else {
+      return 0
     }
-    
-    return result
+    return date.inSameDayAs(today) && !date.inSameDayAs(selectedDate) ? 1 : 0
   }
   
-  func theSameDateAsNowForCurrentlySelectedMonthOffset() -> Date {
-    let now = Date()
-    return theSameDay(as: now, for: self.selectedMonthOffset)
+  func theSameDateAsNowInSelectedMonth() -> Date {
+    Date().theSameDay(in: self.selectedMonthOffset)
   }
   
-  func allDaysOfSelectedMonth() -> [DateValue] {
+  func allDaysOfSelectedMonth() -> [DayDatePair] {
     let calendar = Calendar.current
-    let todayInSelectedMonth = theSameDateAsNowForCurrentlySelectedMonthOffset()
+    let todayInSelectedMonth = theSameDateAsNowInSelectedMonth()
     
-    var days = todayInSelectedMonth.allDaysOfMonth().compactMap { date -> DateValue in
+    var days = todayInSelectedMonth.allDaysOfMonth().compactMap { date -> DayDatePair in
       let day = calendar.component(.day, from: date)
-      return DateValue(day: day, date: date)
+      return DayDatePair(day: day, date: date)
     }
     
     let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
     
     for _ in 0..<firstWeekDay - 1 {
-      days.insert(DateValue(day: -1, date: Date()), at: 0)
+      days.insert(DayDatePair(day: -1, date: nil), at: 0)
     }
     
     return days

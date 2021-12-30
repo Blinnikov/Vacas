@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct DateValue: Identifiable {
+struct DayDatePair: Identifiable {
   var id = UUID()
   var day: Int
-  var date: Date
+  var date: Date?
 }
