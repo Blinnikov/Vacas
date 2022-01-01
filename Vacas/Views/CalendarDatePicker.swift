@@ -65,7 +65,7 @@ struct CalendarDatePicker: View {
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
         ForEach(allDaysOfSelectedMonth()) { pair in
-          CardView(day: pair.day, date: pair.date)
+          CardView(day: pair.number, date: pair.date)
             .background(
               Capsule()
                 .fill(Color.selection)
@@ -102,9 +102,9 @@ struct CalendarDatePicker: View {
     }
   }
   
-  func CardView(day: Int, date: Date?) -> some View {
+  func CardView(dayItem: DayItem) -> some View {
     VStack {
-      if let date = date {
+      if let date = dayItem.date, let day = dayItem.number {
         Text("\(day)")
           .font(.title3.bold())
           .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
@@ -128,19 +128,19 @@ struct CalendarDatePicker: View {
     Date().theSameDay(in: self.selectedMonthOffset)
   }
   
-  func allDaysOfSelectedMonth() -> [DayDatePair] {
+  func allDaysOfSelectedMonth() -> [DayItem] {
     let calendar = Calendar.current
     let todayInSelectedMonth = theSameDateAsNowInSelectedMonth()
     
-    var days = todayInSelectedMonth.allDaysOfMonth().compactMap { date -> DayDatePair in
+    var days = todayInSelectedMonth.allDaysOfMonth().compactMap { date -> DayItem in
       let day = calendar.component(.day, from: date)
-      return DayDatePair(day: day, date: date)
+      return DayItem(number: day, date: date)
     }
     
     let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
     
     for _ in 0..<firstWeekDay - 1 {
-      days.insert(DayDatePair(day: -1, date: nil), at: 0)
+      days.insert(DayItem(number: -1, date: nil), at: 0)
     }
     
     return days
