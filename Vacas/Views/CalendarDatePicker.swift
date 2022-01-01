@@ -17,6 +17,7 @@ struct CalendarDatePicker: View {
   @Binding var selectedDate: Date
   @State private var currentDate = Date()
   @State private var selectedMonthOffset = 0
+  private let timeOffRecords = ScheduleChange.testData
   
   var body: some View {
     VStack(spacing: 35) {
@@ -105,12 +106,25 @@ struct CalendarDatePicker: View {
   func CardView(dayItem: DayItem) -> some View {
     VStack {
       if let date = dayItem.date, let day = dayItem.number {
-        Text("\(day)")
-          .font(.title3.bold())
-          .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
-          .frame(maxWidth: .infinity)
-        
-        Spacer()
+        if hasTimeOff(day: date) {
+          Text("\(day)")
+            .font(.title3.bold())
+            .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
+            .frame(maxWidth: .infinity)
+          
+          Spacer()
+          
+          Circle()
+            .fill(date.inSameDayAs(selectedDate) ? .white : Color.selection)
+            .frame(width: 8, height: 8)
+        } else {
+          Text("\(day)")
+            .font(.title3.bold())
+            .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
+            .frame(maxWidth: .infinity)
+          
+          Spacer()
+        }
       }
     }
     .padding(.vertical, 8)
@@ -122,6 +136,14 @@ struct CalendarDatePicker: View {
       return 0
     }
     return date.inSameDayAs(today) && !date.inSameDayAs(selectedDate) ? 1 : 0
+  }
+  
+  func hasTimeOff(day: Date) -> Bool {
+    let timeOffRecord = self.timeOffRecords.first(where: { record in
+      record.date.inSameDayAs(day)
+    })
+    
+    return timeOffRecord != nil
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
