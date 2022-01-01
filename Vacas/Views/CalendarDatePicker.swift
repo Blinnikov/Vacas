@@ -64,20 +64,20 @@ struct CalendarDatePicker: View {
       // Day numbers
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
-        ForEach(allDaysOfSelectedMonth()) { pair in
-          CardView(day: pair.number, date: pair.date)
+        ForEach(allDaysOfSelectedMonth()) { item in
+          CardView(dayItem: item)
             .background(
               Capsule()
                 .fill(Color.selection)
                 .padding(.horizontal, 8)
-                .opacity(pair.date != nil && pair.date!.inSameDayAs(selectedDate) ? 1 : 0)
+                .opacity(item.date != nil && item.date!.inSameDayAs(selectedDate) ? 1 : 0)
             )
-            .overlay(selectionOverlay(for: pair.date))
+            .overlay(selectionOverlay(for: item.date))
             .onTapGesture {
-              if pair.date == nil {
+              guard let date = item.date else {
                 return
               }
-              selectedDate = pair.date!
+              selectedDate = date
             }
         }
       }
@@ -152,8 +152,8 @@ struct CalendarDatePicker: View {
   }
 }
 
-struct CalendarDatePicker_Previews: PreviewProvider {
-  static var previews: some View {
-    CalendarDatePicker(selectedDate: Binding.constant(Date()))
-  }
-}
+//struct CalendarDatePicker_Previews: PreviewProvider {
+//  static var previews: some View {
+//    CalendarDatePicker(selectedDate: Binding.constant(Date()))
+//  }
+//}
