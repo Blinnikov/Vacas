@@ -15,6 +15,38 @@ struct CalendarView: View {
       VStack(spacing: 20) {
         CalendarDatePicker(selectedDate: $selection)
       }
+      .padding(.vertical)
+    }
+    .safeAreaInset(edge: .bottom) {
+      HStack {
+        Button {
+          
+        } label: {
+          Text("Add record")
+            .fontWeight(.bold)
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
+            .background(
+              Color.peach, in: Capsule()
+            )
+        }
+        
+        Button {
+          
+        } label: {
+          Text("Compensate")
+            .fontWeight(.bold)
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
+            .background(
+              Color.plum, in: Capsule()
+            )
+        }
+      }
+      .padding(.horizontal)
+      .padding(.top, 10)
+      .foregroundColor(.white)
+      .background(.ultraThinMaterial)
     }
   }
 }
