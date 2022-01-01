@@ -17,7 +17,7 @@ struct CalendarDatePicker: View {
   @Binding var selectedDate: Date
   @State private var currentDate = Date()
   @State private var selectedMonthOffset = 0
-  private let timeOffRecords = ScheduleChange.testData
+  private let scheduleChangeRecords = ScheduleChange.testData
   
   var body: some View {
     VStack(spacing: 35) {
@@ -82,6 +82,35 @@ struct CalendarDatePicker: View {
             }
         }
       }
+      
+      // TODO: Extract as Records view
+      // TODO: Hide if in other month
+      VStack(spacing: 15) {
+        Text("Events")
+          .font(.title2.bold())
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding(.vertical, 20)
+        
+        if let record = scheduleChangeRecord(for: selectedDate) {
+          VStack(alignment: .leading, spacing: 10) {
+            Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
+            
+            Text(record.title)
+              .font(.title2.bold())
+          }
+          .padding(.vertical, 10)
+          .padding(.horizontal)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .background(
+            Color.purple
+              .opacity(0.5)
+              .cornerRadius(10)
+          )
+        } else {
+          Text("No events for the day")
+        }
+      }
+      .padding()
     }
     .onChange(of: selectedMonthOffset) { _ in
       currentDate = theSameDateAsNowInSelectedMonth()
@@ -106,7 +135,7 @@ struct CalendarDatePicker: View {
   func CardView(dayItem: DayItem) -> some View {
     VStack {
       if let date = dayItem.date, let day = dayItem.number {
-        if hasTimeOff(day: date) {
+        if hasScheduleChange(for: date) {
           Text("\(day)")
             .font(.title3.bold())
             .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
@@ -138,12 +167,14 @@ struct CalendarDatePicker: View {
     return date.inSameDayAs(today) && !date.inSameDayAs(selectedDate) ? 1 : 0
   }
   
-  func hasTimeOff(day: Date) -> Bool {
-    let timeOffRecord = self.timeOffRecords.first(where: { record in
+  func scheduleChangeRecord(for day: Date) -> ScheduleChange? {
+    return self.scheduleChangeRecords.first(where: { record in
       record.date.inSameDayAs(day)
     })
-    
-    return timeOffRecord != nil
+  }
+  
+  func hasScheduleChange(for day: Date) -> Bool {
+    scheduleChangeRecord(for: day) != nil
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
