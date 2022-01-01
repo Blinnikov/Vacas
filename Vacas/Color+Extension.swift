@@ -9,4 +9,6 @@ import SwiftUI
 
 extension Color {
   static let selection = Color("Selection")
+  static let peach = Color("Peach")
+  static let plum = Color("Plum")
 }
