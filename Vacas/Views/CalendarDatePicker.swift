@@ -82,39 +82,14 @@ struct CalendarDatePicker: View {
             }
         }
       }
-      
-      // TODO: Extract as Records view
-      // TODO: Hide if in other month
-      VStack(spacing: 15) {
-        Text("Events")
-          .font(.title2.bold())
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .padding(.vertical, 20)
-        
-        if let record = scheduleChangeRecord(for: selectedDate) {
-          VStack(alignment: .leading, spacing: 10) {
-            Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
-            
-            Text(record.title)
-              .font(.title2.bold())
-          }
-          .padding(.vertical, 10)
-          .padding(.horizontal)
-          .frame(maxWidth: .infinity, alignment: .leading)
-          .background(
-            Color.purple
-              .opacity(0.5)
-              .cornerRadius(10)
-          )
-        } else {
-          Text("No events for the day")
-        }
-      }
-      .padding()
     }
     .onChange(of: selectedMonthOffset) { _ in
       currentDate = theSameDateAsNowInSelectedMonth()
     }
+    
+    let records = scheduleRecords(for: selectedDate)
+    DayDetailsView(records: records)
+      .padding(.horizontal)
   }
   
   func selectionOverlay(for date: Date?) -> some View {
