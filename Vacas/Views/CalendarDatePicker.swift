@@ -66,7 +66,8 @@ struct CalendarDatePicker: View {
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
         ForEach(allDaysOfSelectedMonth()) { item in
-          CardView(dayItem: item)
+          let hasRecords = hasScheduleRecord(for: item.date)
+          CardView(dayItem: item, hasRecords: hasRecords)
             .background(
               Capsule()
                 .fill(Color.selection)
@@ -107,10 +108,11 @@ struct CalendarDatePicker: View {
     }
   }
   
-  func CardView(dayItem: DayItem) -> some View {
+  // TODO: Probably `hasRecords` can be made a part of ViewModel
+  func CardView(dayItem: DayItem, hasRecords: Bool) -> some View {
     VStack {
       if let date = dayItem.date, let day = dayItem.number {
-        if hasScheduleChange(for: date) {
+        if hasRecords {
           Text("\(day)")
             .font(.title3.bold())
             .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
@@ -148,8 +150,12 @@ struct CalendarDatePicker: View {
     }
   }
   
-  func hasScheduleChange(for day: Date) -> Bool {
-    scheduleChangeRecord(for: day) != nil
+  func hasScheduleRecord(for day: Date?) -> Bool {
+    guard let day = day else {
+      return false
+    }
+    
+    return !scheduleRecords(for: day).isEmpty
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
