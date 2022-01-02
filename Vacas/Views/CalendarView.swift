@@ -17,37 +17,41 @@ struct CalendarView: View {
       }
       .padding(.vertical)
     }
-    .safeAreaInset(edge: .bottom) {
-      HStack {
-        Button {
-          
-        } label: {
-          Text("Add record")
-            .fontWeight(.bold)
-            .padding(.vertical)
-            .frame(maxWidth: .infinity)
-            .background(
-              Color.peach, in: Capsule()
-            )
-        }
+//    .safeAreaInset(edge: .bottom) {
+//      buttons
+//    }
+  }
+  
+  var buttons: some View {
+    HStack {
+      Button {
         
-        Button {
-          
-        } label: {
-          Text("Compensate")
-            .fontWeight(.bold)
-            .padding(.vertical)
-            .frame(maxWidth: .infinity)
-            .background(
-              Color.plum, in: Capsule()
-            )
-        }
+      } label: {
+        Text("Add record")
+          .fontWeight(.bold)
+          .padding(.vertical)
+          .frame(maxWidth: .infinity)
+          .background(
+            Color.peach, in: Capsule()
+          )
       }
-      .padding(.horizontal)
-      .padding(.top, 10)
-      .foregroundColor(.white)
-      .background(.ultraThinMaterial)
+      
+      Button {
+        
+      } label: {
+        Text("Compensate")
+          .fontWeight(.bold)
+          .padding(.vertical)
+          .frame(maxWidth: .infinity)
+          .background(
+            Color.plum, in: Capsule()
+          )
+      }
     }
+    .padding(.horizontal)
+    .padding(.top, 10)
+    .foregroundColor(.white)
+    .background(.ultraThinMaterial)
   }
 }
 
