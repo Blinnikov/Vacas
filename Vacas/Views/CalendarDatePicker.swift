@@ -17,7 +17,7 @@ struct CalendarDatePicker: View {
   @Binding var selectedDate: Date
   @State private var currentDate = Date()
   @State private var selectedMonthOffset = 0
-  private let scheduleChangeRecords = ScheduleChange.testData
+  private let scheduleChangeRecords = ScheduleRecord.testData
   
   var body: some View {
     VStack(spacing: 35) {
@@ -142,10 +142,10 @@ struct CalendarDatePicker: View {
     return date.inSameDayAs(today) && !date.inSameDayAs(selectedDate) ? 1 : 0
   }
   
-  func scheduleChangeRecord(for day: Date) -> ScheduleChange? {
-    return self.scheduleChangeRecords.first(where: { record in
+  func scheduleRecords(for day: Date) -> [ScheduleRecord] {
+    return self.scheduleChangeRecords.filter{ record in
       record.date.inSameDayAs(day)
-    })
+    }
   }
   
   func hasScheduleChange(for day: Date) -> Bool {

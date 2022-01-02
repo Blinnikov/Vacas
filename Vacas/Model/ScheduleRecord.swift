@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct ScheduleChange {
+struct ScheduleRecord: Identifiable {
+  let id = UUID()
   let title: String
   let date: Date
   let type: ScheduleChangeType
@@ -20,9 +21,10 @@ struct ScheduleChange {
   }
   
   static let testData = [
-    ScheduleChange(title: "New Year", date: dateFromString("2022-01-01"), type: .timeOff(.holiday)),
-    ScheduleChange(title: "New Year Holiday week", date: dateFromString("2022-01-02"), type: .timeOff(.holiday)),
-    ScheduleChange(title: "New Year Holiday week", date: dateFromString("2022-01-03"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "New Year", date: dateFromString("2022-01-01"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "New Year Holiday week", date: dateFromString("2022-01-02"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Emirates flight", date: dateFromString("2022-01-02"), type: .timeOff(.vacation)),
+    ScheduleRecord(title: "New Year Holiday week", date: dateFromString("2022-01-03"), type: .timeOff(.holiday)),
   ]
 }
 
