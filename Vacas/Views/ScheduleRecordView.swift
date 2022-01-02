@@ -21,10 +21,26 @@ struct ScheduleRecordView: View {
     .padding(.horizontal)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(
-      Color.purple
-        .opacity(0.5)
+      background(for: record)
         .cornerRadius(10)
     )
+  }
+  
+  func background(for record: ScheduleRecord) -> some View {
+    let defaultColor = Color.purple
+      .opacity(0.5)
+    
+    switch record.type {
+    case .overtime:
+      return defaultColor
+    case .timeOff(let t):
+      switch t {
+      case .vacation:
+        return Color.peach
+      default:
+        return defaultColor
+      }
+    }
   }
 }
 
