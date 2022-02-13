@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		780D82B827B97724001F2C7F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780D82B727B97724001F2C7F /* Settings.swift */; };
+		780D82BA27B9784B001F2C7F /* Settings+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780D82B927B9784B001F2C7F /* Settings+Extension.swift */; };
 		781712B92780D5E100CBDEFD /* ScheduleRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781712B82780D5E100CBDEFD /* ScheduleRecord.swift */; };
 		781712BB278213E600CBDEFD /* ScheduleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781712BA278213E600CBDEFD /* ScheduleRecordView.swift */; };
 		781712BD2782175C00CBDEFD /* DayDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781712BC2782175C00CBDEFD /* DayDetailsView.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		780D82B727B97724001F2C7F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		780D82B927B9784B001F2C7F /* Settings+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Extension.swift"; sourceTree = "<group>"; };
 		781712B82780D5E100CBDEFD /* ScheduleRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecord.swift; sourceTree = "<group>"; };
 		781712BA278213E600CBDEFD /* ScheduleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecordView.swift; sourceTree = "<group>"; };
 		781712BC2782175C00CBDEFD /* DayDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsView.swift; sourceTree = "<group>"; };
@@ -55,6 +59,7 @@
 			children = (
 				7874037E277B79B800576267 /* DayItem.swift */,
 				781712B82780D5E100CBDEFD /* ScheduleRecord.swift */,
+				780D82B727B97724001F2C7F /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 				78CDD8532773D0440037D098 /* Preview Content */,
 				78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */,
 				7874037C277B770600576267 /* Date+Extension.swift */,
+				780D82B927B9784B001F2C7F /* Settings+Extension.swift */,
 			);
 			path = Vacas;
 			sourceTree = "<group>";
@@ -186,10 +192,12 @@
 				781712BB278213E600CBDEFD /* ScheduleRecordView.swift in Sources */,
 				78740377277A206E00576267 /* SettingsView.swift in Sources */,
 				78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */,
+				780D82B827B97724001F2C7F /* Settings.swift in Sources */,
 				78740375277A205800576267 /* CalendarView.swift in Sources */,
 				7874037F277B79B800576267 /* DayItem.swift in Sources */,
 				7874037D277B770600576267 /* Date+Extension.swift in Sources */,
 				78C4D062277D0C9500D3DEF1 /* Color+Extension.swift in Sources */,
+				780D82BA27B9784B001F2C7F /* Settings+Extension.swift in Sources */,
 				781712BD2782175C00CBDEFD /* DayDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
