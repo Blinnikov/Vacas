@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct VacasApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  @StateObject var settingsStore = SettingsStore(named: "Default")
+  
+  var body: some Scene {
+    WindowGroup {
+      ContentView(settingsStore: settingsStore)
     }
+  }
 }

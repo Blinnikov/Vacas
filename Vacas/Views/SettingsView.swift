@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+  @Binding var settings: Settings
+  
   @State var appearance: Int = 2
   @State var hireDate: Date = Date(timeIntervalSince1970: 0)
   
@@ -45,11 +47,30 @@ struct SettingsView: View {
         Text("Service to fetch holidays from") // CoppClark?
       }
     }
+    
+    Form {
+     dayAmountSection
+    }
+  }
+  
+  var dayAmountSection: some View {
+    Section(header: Text("Vacation days per year")) {
+      Stepper("Base days: \(settings.vacationDaysAmount)", value: $settings.vacationDaysAmount, in: 7...40)
+      VStack {
+        Stepper("Extra days: \(settings.extraVacationDaysAmount)", value: $settings.extraVacationDaysAmount, in: 0...7)
+        HStack {
+          Text("Extra days amount that can be compensated")
+            .font(.caption2)
+            .foregroundColor(.gray)
+          Spacer()
+        }
+      }
+    }
   }
 }
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-    SettingsView()
+    SettingsView(settings: .constant(Settings()))
   }
 }
