@@ -72,7 +72,7 @@ struct CalendarDatePicker: View {
           CardView(dayItem: item, hasRecords: hasRecords)
             .background(
               Capsule()
-                .fill(Color.selection)
+                .fill(settingsStore.settings.color)
                 .padding(.horizontal, 8)
                 .opacity(item.date != nil && item.date!.inSameDayAs(selectedDate) ? 1 : 0)
             )
@@ -100,7 +100,7 @@ struct CalendarDatePicker: View {
       HStack {
         Spacer(minLength: 0)
         Circle()
-          .stroke(Color.selection, lineWidth: 2)
+          .stroke(settingsStore.settings.color, lineWidth: 2)
           .frame(width: DrawingConstants.selectedDayFrameWidth)
           .offset(y: DrawingConstants.selectedDayFrameOffset)
           .opacity(opacity(for: date))
@@ -123,7 +123,7 @@ struct CalendarDatePicker: View {
           Spacer()
           
           Circle()
-            .fill(date.inSameDayAs(selectedDate) ? .white : Color.selection)
+            .fill(date.inSameDayAs(selectedDate) ? .white : settingsStore.settings.color)
             .frame(width: 8, height: 8)
         } else {
           Text("\(day)")
