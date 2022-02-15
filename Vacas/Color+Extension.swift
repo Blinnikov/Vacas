@@ -8,9 +8,9 @@
 import SwiftUI
 
 extension Color {
-  static let selection = Self.init(.sRGB, red: 0.994, green: 0.51, blue: 0.515, opacity: 1.0)
-  static let peach = Self.init(.sRGB, red: 0.997, green: 0.743, blue: 0.515, opacity: 1.0)
-  static let plum = Self.init(.sRGB, red: 0.568, green: 0.495, blue: 0.967, opacity: 1.0)
+  static let selection = Self.init(rgbaColor: .selection)
+  static let peach = Self.init(rgbaColor: .peach)
+  static let plum = Self.init(rgbaColor: .plum)
   
   init(rgbaColor rgba: RGBAColor) {
     self.init(.sRGB, red: rgba.red, green: rgba.green, blue: rgba.blue, opacity: rgba.alpha)
