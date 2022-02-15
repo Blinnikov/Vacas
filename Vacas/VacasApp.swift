@@ -13,7 +13,8 @@ struct VacasApp: App {
   
   var body: some Scene {
     WindowGroup {
-      ContentView(settingsStore: settingsStore)
+      ContentView()
+        .environmentObject(settingsStore)
     }
   }
 }

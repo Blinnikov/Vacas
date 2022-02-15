@@ -14,6 +14,8 @@ struct CalendarDatePicker: View {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   let today = Date()
   
+  @EnvironmentObject var settingsStore: SettingsStore
+  
   @Binding var selectedDate: Date
   @State private var currentDate = Date()
   @State private var selectedMonthOffset = 0

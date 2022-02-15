@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-  @ObservedObject var settingsStore: SettingsStore
   @State var selectedTab = 0
   
   var body: some View {
@@ -22,7 +21,7 @@ struct ContentView: View {
         }
         .tag(0)
       
-      SettingsView(settings: $settingsStore.settings)
+      SettingsView()
         .tabItem {
           VStack {
             Image(systemName: "gear")
@@ -36,6 +35,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView(settingsStore: SettingsStore(named: "Preview"))
+    ContentView()
   }
 }

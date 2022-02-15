@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @Binding var settings: Settings
+  @EnvironmentObject var settingsStore: SettingsStore
   
   @State var appearance: Int = 2
   @State var hireDate: Date = Date(timeIntervalSince1970: 0)
@@ -55,9 +55,9 @@ struct SettingsView: View {
   
   var dayAmountSection: some View {
     Section(header: Text("Vacation days per year")) {
-      Stepper("Base days: \(settings.vacationDaysAmount)", value: $settings.vacationDaysAmount, in: 7...40)
+      Stepper("Base days: \(settingsStore.settings.vacationDaysAmount)", value: $settingsStore.settings.vacationDaysAmount, in: 7...40)
       VStack {
-        Stepper("Extra days: \(settings.extraVacationDaysAmount)", value: $settings.extraVacationDaysAmount, in: 0...7)
+        Stepper("Extra days: \(settingsStore.settings.extraVacationDaysAmount)", value: $settingsStore.settings.extraVacationDaysAmount, in: 0...7)
         HStack {
           Text("Extra days amount that can be compensated")
             .font(.caption2)
@@ -71,6 +71,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-    SettingsView(settings: .constant(Settings()))
+    SettingsView()
   }
 }
