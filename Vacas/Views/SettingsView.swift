@@ -59,6 +59,13 @@ struct SettingsView: View {
   
   var appearanceSection: some View {
     Section(header: Text("Appearance")) {
+      Picker("Appearance", selection: $settingsStore.settings.appearance) {
+        Text("Light").tag(Appearance.light)
+        Text("Dark").tag(Appearance.dark)
+        Text("System").tag(Appearance.system)
+      }
+      .pickerStyle(SegmentedPickerStyle())
+      
       ColorPicker("Tint color", selection: $settingsStore.settings.color)
       
       HStack {

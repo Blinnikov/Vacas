@@ -17,7 +17,7 @@ struct Settings: Codable {
 
 extension Settings {
   init() {
-    self.appearance = .System
+    self.appearance = .system
     self.tintColor = .selection
     self.hireDate = Date()
     self.vacationDaysAmount = 28
@@ -39,7 +39,7 @@ extension RGBAColor {
 }
 
 enum Appearance: String, Codable {
-  case Light
-  case Dark
-  case System
+  case light
+  case dark
+  case system
 }

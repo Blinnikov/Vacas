@@ -14,6 +14,7 @@ struct VacasApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
+        .preferredColorScheme(settingsStore.settings.appearance.getColorScheme())
         .environmentObject(settingsStore)
     }
   }
