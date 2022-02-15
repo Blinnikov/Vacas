@@ -31,6 +31,10 @@ class SettingsStore: ObservableObject {
     restoreFromUserDefaults()
   }
   
+  func setTintColor(_ color: Color) {
+    self.settings.tintColor = RGBAColor(color: color)
+  }
+  
   private var userDefaultsKey: String {
     "SettingsStore:\(name)"
   }

@@ -31,7 +31,7 @@ struct SettingsView: View {
         HStack {
           Text("Tint color")
           Spacer()
-          Image(systemName: "circle.fill").foregroundColor(Color.selection)
+          Image(systemName: "circle.fill").foregroundColor(settingsStore.settings.color)
           Image(systemName: "circle.fill").foregroundColor(Color.plum)
           Image(systemName: "circle.fill").foregroundColor(Color.peach)
         }
@@ -48,8 +48,30 @@ struct SettingsView: View {
       }
     }
     
-    Form {
-     dayAmountSection
+    NavigationView {
+      Form {
+        appearanceSection
+        dayAmountSection
+      }
+      .navigationTitle("Settings")
+    }
+  }
+  
+  var appearanceSection: some View {
+    Section(header: Text("Appearance")) {
+      ColorPicker("Tint color", selection: $settingsStore.settings.color)
+      
+      HStack {
+        Text("Default colors")
+        Spacer()
+        
+        ForEach([Color.selection, Color.plum, Color.peach], id: \.self) { color in
+          Image(systemName: "circle.fill").foregroundColor(color)
+            .onTapGesture {
+              settingsStore.setTintColor(color)
+            }
+        }
+      }
     }
   }
   
