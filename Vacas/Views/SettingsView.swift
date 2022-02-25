@@ -14,22 +14,6 @@ struct SettingsView: View {
   @State var hireDate: Date = Date(timeIntervalSince1970: 0)
   
   var body: some View {
-//    List {
-//      Section {
-//        // TODO: I want two features from this picker:
-//        // 1) ability to have the date unset
-//        // 2) open calendar on current week - no one wants to go back into future from 1970 clicking through all the year along the way
-//        // Probably we need to support shadow variable to suit these needs
-//        DatePicker("Hire Date (\(hireDate.isUnset ? "unset" : "set"))", selection: $hireDate, displayedComponents: .date)
-//
-//        Text("Vacation days per year - 28") // Stepper
-//
-//        Text("Days that can be compensated - 3") // Stepper
-//
-//        Text("Service to fetch holidays from") // CoppClark?
-//      }
-//    }
-    
     NavigationView {
       Form {
         appearanceSection
@@ -84,6 +68,10 @@ struct SettingsView: View {
         }
       }
     }
+  }
+  
+  var calendarServiceSection: some View {
+    Text("Service to fetch holidays from") // CoppClark?
   }
 }
 
