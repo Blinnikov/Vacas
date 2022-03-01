@@ -12,6 +12,8 @@
 		781712B92780D5E100CBDEFD /* ScheduleRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781712B82780D5E100CBDEFD /* ScheduleRecord.swift */; };
 		781712BB278213E600CBDEFD /* ScheduleRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781712BA278213E600CBDEFD /* ScheduleRecordView.swift */; };
 		781712BD2782175C00CBDEFD /* DayDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781712BC2782175C00CBDEFD /* DayDetailsView.swift */; };
+		7827571527CE824900DDAD94 /* VacasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827571427CE824900DDAD94 /* VacasTests.swift */; };
+		7827571C27CE82D200DDAD94 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827571B27CE82D200DDAD94 /* DateService.swift */; };
 		78493D7127BAB876001CCAB9 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78493D7027BAB876001CCAB9 /* SettingsStore.swift */; };
 		78740375277A205800576267 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78740374277A205800576267 /* CalendarView.swift */; };
 		78740377277A206E00576267 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78740376277A206E00576267 /* SettingsView.swift */; };
@@ -26,12 +28,25 @@
 		78CDD8552773D0440037D098 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CDD8542773D0440037D098 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7827571627CE824900DDAD94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78CDD8422773D0430037D098 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 78CDD8492773D0430037D098;
+			remoteInfo = Vacas;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		780D82B727B97724001F2C7F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		780D82B927B9784B001F2C7F /* Settings+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Extension.swift"; sourceTree = "<group>"; };
 		781712B82780D5E100CBDEFD /* ScheduleRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecord.swift; sourceTree = "<group>"; };
 		781712BA278213E600CBDEFD /* ScheduleRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecordView.swift; sourceTree = "<group>"; };
 		781712BC2782175C00CBDEFD /* DayDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsView.swift; sourceTree = "<group>"; };
+		7827571227CE824900DDAD94 /* VacasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VacasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7827571427CE824900DDAD94 /* VacasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacasTests.swift; sourceTree = "<group>"; };
+		7827571B27CE82D200DDAD94 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		78493D7027BAB876001CCAB9 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		78740374277A205800576267 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		78740376277A206E00576267 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -48,6 +63,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7827570F27CE824900DDAD94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78CDD8472773D0430037D098 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7827571327CE824900DDAD94 /* VacasTests */ = {
+			isa = PBXGroup;
+			children = (
+				7827571427CE824900DDAD94 /* VacasTests.swift */,
+			);
+			path = VacasTests;
+			sourceTree = "<group>";
+		};
 		78493D6F27BAB819001CCAB9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +102,7 @@
 				7874037E277B79B800576267 /* DayItem.swift */,
 				781712B82780D5E100CBDEFD /* ScheduleRecord.swift */,
 				780D82B727B97724001F2C7F /* Settings.swift */,
+				7827571B27CE82D200DDAD94 /* DateService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -93,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				78CDD84C2773D0430037D098 /* Vacas */,
+				7827571327CE824900DDAD94 /* VacasTests */,
 				78CDD84B2773D0430037D098 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				78CDD84A2773D0430037D098 /* Vacas.app */,
+				7827571227CE824900DDAD94 /* VacasTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +166,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7827571127CE824900DDAD94 /* VacasTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7827571A27CE824900DDAD94 /* Build configuration list for PBXNativeTarget "VacasTests" */;
+			buildPhases = (
+				7827570E27CE824900DDAD94 /* Sources */,
+				7827570F27CE824900DDAD94 /* Frameworks */,
+				7827571027CE824900DDAD94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7827571727CE824900DDAD94 /* PBXTargetDependency */,
+			);
+			name = VacasTests;
+			productName = VacasTests;
+			productReference = 7827571227CE824900DDAD94 /* VacasTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		78CDD8492773D0430037D098 /* Vacas */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 78CDD8582773D0440037D098 /* Build configuration list for PBXNativeTarget "Vacas" */;
@@ -160,6 +211,10 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					7827571127CE824900DDAD94 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 78CDD8492773D0430037D098;
+					};
 					78CDD8492773D0430037D098 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -179,11 +234,19 @@
 			projectRoot = "";
 			targets = (
 				78CDD8492773D0430037D098 /* Vacas */,
+				7827571127CE824900DDAD94 /* VacasTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7827571027CE824900DDAD94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78CDD8482773D0430037D098 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,6 +259,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7827570E27CE824900DDAD94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7827571527CE824900DDAD94 /* VacasTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		78CDD8462773D0430037D098 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,6 +282,7 @@
 				7874037F277B79B800576267 /* DayItem.swift in Sources */,
 				7874037D277B770600576267 /* Date+Extension.swift in Sources */,
 				78493D7127BAB876001CCAB9 /* SettingsStore.swift in Sources */,
+				7827571C27CE82D200DDAD94 /* DateService.swift in Sources */,
 				78803CA127BC4BE500724746 /* Appearance+Extension.swift in Sources */,
 				78C4D062277D0C9500D3DEF1 /* Color+Extension.swift in Sources */,
 				780D82BA27B9784B001F2C7F /* Settings+Extension.swift in Sources */,
@@ -220,7 +292,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7827571727CE824900DDAD94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 78CDD8492773D0430037D098 /* Vacas */;
+			targetProxy = 7827571627CE824900DDAD94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7827571827CE824900DDAD94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BKG2E965LP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.blinnikov.igor.VacasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vacas.app/Vacas";
+			};
+			name = Debug;
+		};
+		7827571927CE824900DDAD94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BKG2E965LP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.blinnikov.igor.VacasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vacas.app/Vacas";
+			};
+			name = Release;
+		};
 		78CDD8562773D0440037D098 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -400,6 +516,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7827571A27CE824900DDAD94 /* Build configuration list for PBXNativeTarget "VacasTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7827571827CE824900DDAD94 /* Debug */,
+				7827571927CE824900DDAD94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		78CDD8452773D0430037D098 /* Build configuration list for PBXProject "Vacas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
