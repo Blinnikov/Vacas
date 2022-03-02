@@ -25,7 +25,8 @@ struct ScheduleRecord: Identifiable {
     ScheduleRecord(title: "New Year Holiday week", date: dateFromString("2022-01-02"), type: .timeOff(.holiday)),
     ScheduleRecord(title: "Emirates flight", date: dateFromString("2022-01-02"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "New Year Holiday week", date: dateFromString("2022-01-03"), type: .timeOff(.holiday)),
-    ScheduleRecord(title: "New Year Holiday week", date: dateFromString("2022-02-23"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Defender of the Fatherland Day", date: dateFromString("2022-02-23"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "International Women's Day", date: dateFromString("2022-03-08"), type: .timeOff(.holiday)),
   ]
 }
 
