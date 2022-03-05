@@ -11,11 +11,22 @@ struct CalendarView: View {
   @State var selection = Date()
   
   var body: some View {
-    ScrollView(.vertical, showsIndicators: false) {
-      VStack(spacing: 20) {
-        CalendarDatePicker(selectedDate: $selection)
+    VStack {
+      HStack {
+        Spacer()
+        Button {
+          
+        } label: {
+          Image(systemName: "ant.circle")
+        }
+        .padding(.horizontal)
       }
-      .padding(.vertical)
+      ScrollView(.vertical, showsIndicators: false) {
+        VStack(spacing: 20) {
+          CalendarDatePicker(selectedDate: $selection)
+        }
+        .padding(.vertical)
+      }
     }
 //    .safeAreaInset(edge: .bottom) {
 //      buttons
@@ -58,5 +69,6 @@ struct CalendarView: View {
 struct CalendarView_Previews: PreviewProvider {
   static var previews: some View {
     CalendarView()
+      .environmentObject(SettingsStore(named: "Preview"))
   }
 }
