@@ -31,7 +31,6 @@ struct ScheduleRecord: Identifiable {
     ScheduleRecord(title: "Vacation", date: dateFromString("2022-03-09"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: dateFromString("2022-03-10"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: dateFromString("2022-03-11"), type: .timeOff(.vacation)),
-    ScheduleRecord(title: "Vacation", date: dateFromString("2022-05-31"), type: .timeOff(.vacation)),
   ]
 }
 
