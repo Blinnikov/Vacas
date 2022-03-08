@@ -9,6 +9,13 @@ import Foundation
 
 extension Date {
   
+  static func from(_ dateString: String) -> Date {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    let result = dateFormatter.date(from: dateString)
+    return result ?? Date()
+  }
+  
   // MARK: - String representation
   var yearString: String {
     let formatter = DateFormatter()
