@@ -26,6 +26,16 @@ class VacasTests: XCTestCase {
     assert(dateService.getToday().inSameDayAs(today))
   }
   
+  func testFirstDayOfCurrentYear() {
+    let day = dateService.firstDayOfCurrentyear
+    XCTAssertEqual(day, Date.from("2022-01-01"))
+  }
+  
+  func testFirstDayOf2021() {
+    let day = dateService.firstDay(of: 2021)
+    assert(day == Date.from("2021-01-01"))
+  }
+  
   func testExample() throws {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
