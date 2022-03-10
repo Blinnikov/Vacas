@@ -35,6 +35,14 @@ class VacasTests: XCTestCase {
     assert(day == Date.from("2021-01-01"))
   }
   
+  func testWorkingDaysCount() {
+    let march1 = Date.from("2022-03-01")
+    let march8 = Date.from("2022-03-08")
+    
+    let count = dateService.workingDays(between: march1, and: march8)
+    XCTAssertEqual(count, 5)
+  }
+  
   func testExample() throws {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
