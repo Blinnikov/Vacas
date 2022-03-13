@@ -27,6 +27,11 @@ class VacasTests: XCTestCase {
     assert(day == Date.from("2021-01-01"))
   }
   
+  func testFirstDayOf2022() {
+    let day = dateService.firstDay(of: 2022)
+    assert(day == Date.from("2022-01-01"))
+  }
+  
   func testWorkingDaysCount() {
     let march1 = Date.from("2022-03-01")
     let march8 = Date.from("2022-03-08")
