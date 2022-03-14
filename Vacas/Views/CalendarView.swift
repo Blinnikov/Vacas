@@ -8,18 +8,22 @@
 import SwiftUI
 
 struct CalendarView: View {
-  @State var selection = Date()
+  @State private var selection = Date()
+  @State private var developerInfoShown = false
   
   var body: some View {
     VStack {
       HStack {
         Spacer()
         Button {
-          
+          developerInfoShown.toggle()
         } label: {
           Image(systemName: "ant.circle")
         }
         .padding(.horizontal)
+        .popover(isPresented: $developerInfoShown) {
+          DeveloperInfoView()
+        }
       }
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 20) {

@@ -26,6 +26,7 @@
 		78CDD8502773D0430037D098 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CDD84F2773D0430037D098 /* ContentView.swift */; };
 		78CDD8522773D0440037D098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CDD8512773D0440037D098 /* Assets.xcassets */; };
 		78CDD8552773D0440037D098 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CDD8542773D0440037D098 /* Preview Assets.xcassets */; };
+		78F84F7827DF506000657C8E /* DeveloperInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F84F7727DF506000657C8E /* DeveloperInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		78CDD84F2773D0430037D098 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		78CDD8512773D0440037D098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		78CDD8542773D0440037D098 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		78F84F7727DF506000657C8E /* DeveloperInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				7874037A277B723F00576267 /* CalendarDatePicker.swift */,
 				781712BA278213E600CBDEFD /* ScheduleRecordView.swift */,
 				781712BC2782175C00CBDEFD /* DayDetailsView.swift */,
+				78F84F7727DF506000657C8E /* DeveloperInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				78CDD8502773D0430037D098 /* ContentView.swift in Sources */,
 				781712B92780D5E100CBDEFD /* ScheduleRecord.swift in Sources */,
 				7874037B277B723F00576267 /* CalendarDatePicker.swift in Sources */,
+				78F84F7827DF506000657C8E /* DeveloperInfoView.swift in Sources */,
 				781712BB278213E600CBDEFD /* ScheduleRecordView.swift in Sources */,
 				78740377277A206E00576267 /* SettingsView.swift in Sources */,
 				78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */,
