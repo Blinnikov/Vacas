@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct DeveloperInfoView: View {
+  let dateService = DateService()
+  
   var body: some View {
-    Text("Developer Info")
-      .font(.title)
+    VStack {
+      HStack {
+        Text("Developer Info")
+          .font(.title)
+          .padding()
+        
+        Spacer()
+      }
+      
+      HStack {
+        Text("Working days this year:")
+        Spacer()
+        Text("\(dateService.workingDaysThisYear())")
+      }
+      .padding()
+      
+      Spacer()
+    }
+    
 //      .frame(minWidth: 300, minHeight: 350)
   }
 }
