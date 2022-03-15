@@ -39,4 +39,9 @@ class VacasTests: XCTestCase {
     let count = dateService.workingDays(between: march1, and: march8)
     XCTAssertEqual(count, 5)
   }
+  
+  func testWorkingDaysCountThisYearMusyBeGreaterThanZero() {
+    let count = dateService.workingDaysThisYear()
+    XCTAssertGreaterThan(count, 0)
+  }
 }

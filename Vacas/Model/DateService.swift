@@ -45,4 +45,8 @@ struct DateService {
 //    return (weekendDays, workingDays)
     return workingDays
   }
+  
+  func workingDaysThisYear() -> Int {
+    workingDays(between: firstDayOfCurrentyear, and: Date())
+  }
 }
