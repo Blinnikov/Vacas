@@ -23,7 +23,28 @@ struct DeveloperInfoView: View {
       HStack {
         Text("Working days this year:")
         Spacer()
-        Text("\(dateService.workingDaysThisYear())")
+        Text("\(dateService.workingDaysThisYear)")
+      }
+      .padding()
+      
+      HStack {
+        Text("Vacation days gained:")
+        Spacer()
+        Text("\(dateService.vacationDaysGained)")
+      }
+      .padding()
+      
+      HStack {
+        Text("Vacation days spent this year:")
+        Spacer()
+        Text("\(dateService.vacationDaysSpentThisYear)")
+      }
+      .padding()
+      
+      HStack {
+        Text("Vacation days left this year:")
+        Spacer()
+        Text("\(dateService.vacationDaysLeftThisYear)")
       }
       .padding()
       
