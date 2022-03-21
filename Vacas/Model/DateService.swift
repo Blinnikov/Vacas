@@ -49,24 +49,4 @@ struct DateService {
   var workingDaysThisYear: Int {
     workingDays(between: firstDayOfCurrentyear, and: Date())
   }
-  
-  // TODO: take from settings
-  var totalVacationDaysPerYear: Int {
-    31
-  }
-  
-  var vacationDaysSpentThisYear: Int {
-    0
-  }
-  
-  var vacationDaysLeftThisYear: Int {
-    totalVacationDaysPerYear - vacationDaysSpentThisYear
-  }
-  
-  var vacationDaysGained: Int {
-    let vacationDaysPerMonth = Double(totalVacationDaysPerYear) / 12.0
-    let workingDaysInMonth = 21 // TODO: How to get in on per month basis?
-    let monthsWorked = Double(workingDaysThisYear) / Double(workingDaysInMonth)
-    return Int(floor(vacationDaysPerMonth * monthsWorked))
-  }
 }
