@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DeveloperInfoView: View {
-  let dateService = DateService()
+  @EnvironmentObject var statistics: StatisticsViewModel
   
   var body: some View {
     VStack {
@@ -23,28 +23,28 @@ struct DeveloperInfoView: View {
       HStack {
         Text("Working days this year:")
         Spacer()
-        Text("\(dateService.workingDaysThisYear)")
+        Text("\(statistics.workingDaysThisYear)")
       }
       .padding()
       
       HStack {
         Text("Vacation days gained:")
         Spacer()
-        Text("\(dateService.vacationDaysGained)")
+        Text("\(statistics.vacationDaysGained)")
       }
       .padding()
       
       HStack {
         Text("Vacation days spent this year:")
         Spacer()
-        Text("\(dateService.vacationDaysSpentThisYear)")
+        Text("\(statistics.vacationDaysSpentThisYear)")
       }
       .padding()
       
       HStack {
         Text("Vacation days left this year:")
         Spacer()
-        Text("\(dateService.vacationDaysLeftThisYear)")
+        Text("\(statistics.vacationDaysLeftThisYear)")
       }
       .padding()
       
