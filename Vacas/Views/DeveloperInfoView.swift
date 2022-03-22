@@ -57,6 +57,9 @@ struct DeveloperInfoView: View {
 
 struct DeveloperInfoView_Previews: PreviewProvider {
   static var previews: some View {
+    let settingStore = SettingsStore(named: "Preview")
+    let statistics = StatisticsViewModel(with: settingStore)
     DeveloperInfoView()
+      .environmentObject(statistics)
   }
 }
