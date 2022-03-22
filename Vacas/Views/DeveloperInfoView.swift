@@ -20,38 +20,27 @@ struct DeveloperInfoView: View {
         Spacer()
       }
       
-      HStack {
-        Text("Working days this year:")
-        Spacer()
-        Text("\(statistics.workingDaysThisYear)")
-      }
-      .padding()
+      listItem(title: "Working days this year", statistics.workingDaysThisYear)
       
-      HStack {
-        Text("Vacation days gained:")
-        Spacer()
-        Text("\(statistics.vacationDaysGained)")
-      }
-      .padding()
+      listItem(title: "Vacation days gained", statistics.vacationDaysGained)
       
-      HStack {
-        Text("Vacation days spent this year:")
-        Spacer()
-        Text("\(statistics.vacationDaysSpentThisYear)")
-      }
-      .padding()
+      listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
       
-      HStack {
-        Text("Vacation days left this year:")
-        Spacer()
-        Text("\(statistics.vacationDaysLeftThisYear)")
-      }
-      .padding()
+      listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
       
       Spacer()
     }
     
 //      .frame(minWidth: 300, minHeight: 350)
+  }
+  
+  func listItem(title: String, _ amount: Int) -> some View {
+    HStack {
+      Text("\(title):")
+      Spacer()
+      Text("\(amount)")
+    }
+    .padding()
   }
 }
 
