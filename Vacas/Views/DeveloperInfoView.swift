@@ -30,8 +30,6 @@ struct DeveloperInfoView: View {
       
       Spacer()
     }
-    
-//      .frame(minWidth: 300, minHeight: 350)
   }
   
   func listItem(title: String, _ amount: Int) -> some View {
