@@ -34,13 +34,13 @@ struct DeveloperInfoView: View {
   
   func listItem(title: String, _ amount: Int) -> some View {
     HStack {
-      Text("\(title):")
+      Text("\(title)")
       Spacer()
       Text("\(amount)")
     }
     .padding()
   }
-}
+  }
 
 struct DeveloperInfoView_Previews: PreviewProvider {
   static var previews: some View {
