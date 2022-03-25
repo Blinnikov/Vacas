@@ -16,7 +16,7 @@ class StatisticsViewModel: ObservableObject {
   }
   
   private var totalVacationDaysPerYear: Int {
-    settingsStore.settings.vacationDaysAmount
+    settingsStore.settings.vacationDaysAmount + settingsStore.settings.extraVacationDaysAmount
   }
   
   var vacationDaysSpentThisYear: Int {
