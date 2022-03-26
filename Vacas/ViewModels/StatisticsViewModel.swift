@@ -20,6 +20,11 @@ class StatisticsViewModel: ObservableObject {
   }
   
   var vacationDaysSpentThisYear: Int {
+    // TODO: Probably we need to introduce new kind of store
+    // that will look after akk the data that user enters,
+    // like days oof, vacations and so on.
+    // `vacationDaysSpentThisYear` should be either direct projection from this store
+    // or computed field based on data from this store
     0
   }
   
