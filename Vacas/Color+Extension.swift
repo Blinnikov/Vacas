@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-  static let selection = Self.init(rgbaColor: .selection)
+  static let bloodOrange = Self.init(rgbaColor: .bloodOrange)
   static let peach = Self.init(rgbaColor: .peach)
   static let plum = Self.init(rgbaColor: .plum)
   

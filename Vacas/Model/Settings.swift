@@ -18,7 +18,7 @@ struct Settings: Codable {
 extension Settings {
   init() {
     self.appearance = .system
-    self.tintColor = .selection
+    self.tintColor = .bloodOrange
     self.hireDate = Date()
     self.vacationDaysAmount = 28
     self.extraVacationDaysAmount = 3
@@ -33,7 +33,7 @@ struct RGBAColor: Codable, Equatable, Hashable {
 }
 
 extension RGBAColor {
-  static var selection = RGBAColor(red: 0.994, green: 0.51, blue: 0.515, alpha: 1.0)
+  static var bloodOrange = RGBAColor(red: 0.994, green: 0.51, blue: 0.515, alpha: 1.0)
   static let peach = RGBAColor(red: 0.997, green: 0.743, blue: 0.515, alpha: 1.0)
   static let plum = RGBAColor(red: 0.568, green: 0.495, blue: 0.967, alpha: 1.0)
 }

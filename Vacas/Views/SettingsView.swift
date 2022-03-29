@@ -39,7 +39,7 @@ struct SettingsView: View {
         Text("Default colors")
         Spacer()
         
-        ForEach([Color.selection, Color.plum, Color.peach], id: \.self) { color in
+        ForEach([Color.bloodOrange, Color.plum, Color.peach], id: \.self) { color in
           Image(systemName: "circle.fill").foregroundColor(color)
             .onTapGesture {
               settingsStore.setTintColor(color)
