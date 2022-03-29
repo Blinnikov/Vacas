@@ -14,7 +14,7 @@ struct CalendarDatePicker: View {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   let today = Date()
   
-  @EnvironmentObject var settingsStore: SettingsStore
+  @EnvironmentObject var viewModel: CalendarViewModel
   
   @Binding var selectedDate: Date
   @State private var currentDate = Date()
@@ -72,7 +72,7 @@ struct CalendarDatePicker: View {
           CardView(dayItem: item, hasRecords: hasRecords)
             .background(
               Capsule()
-                .fill(settingsStore.settings.color)
+                .fill(viewModel.selectionColor)
                 .padding(.horizontal, 8)
                 .opacity(item.date != nil && item.date!.inSameDayAs(selectedDate) ? 1 : 0)
             )
@@ -100,7 +100,7 @@ struct CalendarDatePicker: View {
       HStack {
         Spacer(minLength: 0)
         Circle()
-          .stroke(settingsStore.settings.color, lineWidth: 2)
+          .stroke(viewModel.selectionColor, lineWidth: 2)
           .frame(width: DrawingConstants.selectedDayFrameWidth)
           .offset(y: DrawingConstants.selectedDayFrameOffset)
           .opacity(opacity(for: date))
