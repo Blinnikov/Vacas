@@ -68,8 +68,7 @@ struct CalendarDatePicker: View {
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
         ForEach(allDaysOfSelectedMonth()) { item in
-          let hasRecords = hasScheduleRecord(for: item.date)
-          CardView(dayItem: item, hasRecords: hasRecords)
+          CardView(dayItem: item)
             .background(
               Capsule()
                 .fill(viewModel.selectionColor)
@@ -111,27 +110,28 @@ struct CalendarDatePicker: View {
   }
   
   // TODO: Probably `hasRecords` can be made a part of ViewModel
-  func CardView(dayItem: DayItem, hasRecords: Bool) -> some View {
+  func CardView(dayItem: DayItem) -> some View {
     VStack {
       if let date = dayItem.date, let day = dayItem.number {
-        if hasRecords {
-          Text("\(day)")
-            .font(.title3.bold())
-            .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
-            .frame(maxWidth: .infinity)
-          
-          Spacer()
-          
-          Circle()
-            .fill(date.inSameDayAs(selectedDate) ? .white : viewModel.selectionColor)
-            .frame(width: 8, height: 8)
-        } else {
-          Text("\(day)")
-            .font(.title3.bold())
-            .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
-            .frame(maxWidth: .infinity)
-          
-          Spacer()
+        
+        Text("\(day)")
+          .font(.title3.bold())
+          .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
+          .frame(maxWidth: .infinity)
+        
+        Spacer()
+        
+        let records = scheduleRecords(for: date)
+        if !records.isEmpty {
+          // TODO: Do I need to show as many Circles as there are scheduled records, or only several first (1?) would be enough?
+          ForEach(records) { record in
+            // TODO: Add test data with multiple records per day
+            // TODO: Do I need to keep `.white` color on selection
+            Circle()
+//              .fill(viewModel.backgroundColor(for: record))
+              .fill(date.inSameDayAs(selectedDate) ? .white : viewModel.backgroundColor(for: record))
+              .frame(width: 8, height: 8)
+          }
         }
       }
     }
