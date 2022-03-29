@@ -123,7 +123,7 @@ struct CalendarDatePicker: View {
           Spacer()
           
           Circle()
-            .fill(date.inSameDayAs(selectedDate) ? .white : settingsStore.settings.color)
+            .fill(date.inSameDayAs(selectedDate) ? .white : viewModel.selectionColor)
             .frame(width: 8, height: 8)
         } else {
           Text("\(day)")
