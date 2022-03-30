@@ -123,14 +123,17 @@ struct CalendarDatePicker: View {
         
         let records = scheduleRecords(for: date)
         if !records.isEmpty {
-          // TODO: Do I need to show as many Circles as there are scheduled records, or only several first (1?) would be enough?
-          ForEach(records) { record in
-            // TODO: Add test data with multiple records per day
-            // TODO: Do I need to keep `.white` color on selection
-            Circle()
-//              .fill(viewModel.backgroundColor(for: record))
-              .fill(date.inSameDayAs(selectedDate) ? .white : viewModel.backgroundColor(for: record))
-              .frame(width: 8, height: 8)
+          // TODO: Replace with ZStack where circles are stacked on top of each other with increasing left offset
+          HStack(spacing: 4) {
+            // TODO: Do I need to show as many Circles as there are scheduled records, or only several first (1?) would be enough?
+            ForEach(records) { record in
+              // TODO: Add test data with multiple records per day
+              let overlay = Circle().stroke(.white, lineWidth: 1.5).shadow(radius: 2)
+              Circle()
+                .fill(viewModel.backgroundColor(for: record))
+                .frame(width: 8, height: 8)
+                .overlay(overlay)
+            }
           }
         }
       }
