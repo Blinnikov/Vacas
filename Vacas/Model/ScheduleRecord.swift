@@ -21,6 +21,7 @@ struct ScheduleRecord: Identifiable {
     ScheduleRecord(title: "Defender of the Fatherland Day", date: Date.from("2022-02-23"), type: .timeOff(.holiday)),
     ScheduleRecord(title: "Public Holiday", date: Date.from("2022-03-07"), type: .timeOff(.holiday)),
     ScheduleRecord(title: "International Women's Day", date: Date.from("2022-03-08"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Vacation", date: Date.from("2022-03-08"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: Date.from("2022-03-09"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: Date.from("2022-03-10"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: Date.from("2022-03-11"), type: .timeOff(.vacation)),
