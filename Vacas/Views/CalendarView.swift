@@ -72,7 +72,8 @@ struct CalendarView: View {
 
 struct CalendarView_Previews: PreviewProvider {
   static var previews: some View {
+    let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
     CalendarView()
-      .environmentObject(SettingsStore(named: "Preview"))
+      .environmentObject(viewModel)
   }
 }
