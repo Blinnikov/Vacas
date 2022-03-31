@@ -109,7 +109,6 @@ struct CalendarDatePicker: View {
     }
   }
   
-  // TODO: Probably `hasRecords` can be made a part of ViewModel
   func CardView(dayItem: DayItem) -> some View {
     VStack {
       if let date = dayItem.date, let day = dayItem.number {
@@ -121,18 +120,21 @@ struct CalendarDatePicker: View {
         
         Spacer()
         
+        // TODO: Extract these dots as a separate view?
         let records = scheduleRecords(for: date)
         if !records.isEmpty {
           // TODO: Replace with ZStack where circles are stacked on top of each other with increasing left offset
-          HStack(spacing: 4) {
+          ZStack {
             // TODO: Do I need to show as many Circles as there are scheduled records, or only several first (1?) would be enough?
-            ForEach(records) { record in
+            ForEach(0..<records.count, id: \.self) { index in
               // TODO: Add test data with multiple records per day
               let overlay = Circle().stroke(.white, lineWidth: 1.5).shadow(radius: 2)
               Circle()
-                .fill(viewModel.backgroundColor(for: record))
+                .fill(viewModel.backgroundColor(for: records[index]))
                 .frame(width: 8, height: 8)
                 .overlay(overlay)
+                .zIndex(zIndex(for: index))
+                .offset(x: offset(for: index, in: records.count))
             }
           }
         }
@@ -140,6 +142,29 @@ struct CalendarDatePicker: View {
     }
     .padding(.vertical, 8)
     .frame(height: 60, alignment: .top)
+  }
+  
+  // TODO: Add UT?
+  func offset(for index: Int, in count: Int) -> CGFloat {
+    let offsetValue = 6
+    let itemOffsetValue = offsetValue / count
+    let initialOffset = -1 * Int(count / 2) * itemOffsetValue
+    // single or midle element
+//    if count == 1 || (count % 2 != 0 && index == count / 2 + 1) {
+//      return 0
+//    }
+    if count == 1 {
+      return 0
+    }
+    
+//    let sign = index < count / 2 ? -1 : 1
+//    return CGFloat(offsetValue * index - itemOffsetValue)
+    // TODO: It seems it doesn't work properly for 3 items, take a look
+    return CGFloat(initialOffset + offsetValue * index)
+  }
+  
+  func zIndex(for index: Int) -> Double {
+    -Double(index)
   }
   
   func opacity(for date: Date?) -> Double {

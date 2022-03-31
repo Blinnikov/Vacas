@@ -25,6 +25,9 @@ struct ScheduleRecord: Identifiable {
     ScheduleRecord(title: "Vacation", date: Date.from("2022-03-09"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: Date.from("2022-03-10"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Vacation", date: Date.from("2022-03-11"), type: .timeOff(.vacation)),
+    ScheduleRecord(title: "Test 01", date: Date.from("2022-03-31"), type: .timeOff(.vacation)),
+    ScheduleRecord(title: "Test 02", date: Date.from("2022-03-31"), type: .timeOff(.vacation)),
+    ScheduleRecord(title: "Test 03", date: Date.from("2022-03-31"), type: .timeOff(.vacation)),
   ]
 }
 
