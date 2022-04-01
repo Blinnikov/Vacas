@@ -146,21 +146,12 @@ struct CalendarDatePicker: View {
   
   // TODO: Add UT?
   func offset(for index: Int, in count: Int) -> CGFloat {
-    let offsetValue = 6
-    let itemOffsetValue = offsetValue / count
-    let initialOffset = -1 * Int(count / 2) * itemOffsetValue
-    // single or midle element
-//    if count == 1 || (count % 2 != 0 && index == count / 2 + 1) {
-//      return 0
-//    }
-    if count == 1 {
-      return 0
-    }
+    let offsetValue: CGFloat = 15
+    let itemOffsetValue = offsetValue / CGFloat(count)
+    let padding = count % 2 == 0 ? itemOffsetValue / 2 : 0
+    let initialOffset = -1 * CGFloat(count / 2) * itemOffsetValue + padding
     
-//    let sign = index < count / 2 ? -1 : 1
-//    return CGFloat(offsetValue * index - itemOffsetValue)
-    // TODO: It seems it doesn't work properly for 3 items, take a look
-    return CGFloat(initialOffset + offsetValue * index)
+    return initialOffset + itemOffsetValue * CGFloat(index)
   }
   
   func zIndex(for index: Int) -> Double {
