@@ -15,6 +15,7 @@
 		7827571527CE824900DDAD94 /* VacasTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827571427CE824900DDAD94 /* VacasTests.swift */; };
 		7827571C27CE82D200DDAD94 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7827571B27CE82D200DDAD94 /* DateService.swift */; };
 		78493D7127BAB876001CCAB9 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78493D7027BAB876001CCAB9 /* SettingsStore.swift */; };
+		785ABCAD27F8E8E3007C3D86 /* Markers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785ABCAC27F8E8E3007C3D86 /* Markers.swift */; };
 		78740375277A205800576267 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78740374277A205800576267 /* CalendarView.swift */; };
 		78740377277A206E00576267 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78740376277A206E00576267 /* SettingsView.swift */; };
 		7874037B277B723F00576267 /* CalendarDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7874037A277B723F00576267 /* CalendarDatePicker.swift */; };
@@ -51,6 +52,7 @@
 		7827571427CE824900DDAD94 /* VacasTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacasTests.swift; sourceTree = "<group>"; };
 		7827571B27CE82D200DDAD94 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		78493D7027BAB876001CCAB9 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		785ABCAC27F8E8E3007C3D86 /* Markers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markers.swift; sourceTree = "<group>"; };
 		78740374277A205800576267 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		78740376277A206E00576267 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7874037A277B723F00576267 /* CalendarDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDatePicker.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				781712BA278213E600CBDEFD /* ScheduleRecordView.swift */,
 				781712BC2782175C00CBDEFD /* DayDetailsView.swift */,
 				78F84F7727DF506000657C8E /* DeveloperInfoView.swift */,
+				785ABCAC27F8E8E3007C3D86 /* Markers.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */,
 				780D82B827B97724001F2C7F /* Settings.swift in Sources */,
 				78740375277A205800576267 /* CalendarView.swift in Sources */,
+				785ABCAD27F8E8E3007C3D86 /* Markers.swift in Sources */,
 				7874037F277B79B800576267 /* DayItem.swift in Sources */,
 				7874037D277B770600576267 /* Date+Extension.swift in Sources */,
 				78493D7127BAB876001CCAB9 /* SettingsStore.swift in Sources */,

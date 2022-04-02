@@ -120,58 +120,15 @@ struct CalendarDatePicker: View {
         
         Spacer()
         
-        // TODO: Extract these dots as a separate view?
-        let records = scheduleRecords(for: date)
-        let recordsToShowCount = 3
-        let hasMore = records.count > recordsToShowCount
-        let firstRecords = records.prefix(recordsToShowCount)
-        
-        if !firstRecords.isEmpty {
-          // TODO: Replace with ZStack where circles are stacked on top of each other with increasing left offset
-          ZStack {
-            let overlay = Circle().stroke(.white, lineWidth: 1.5).shadow(radius: 2)
-            
-            // TODO: Do I need to show as many Circles as there are scheduled records, or only several first (1?) would be enough?
-            ForEach(0..<records.count, id: \.self) { index in
-              // TODO: Add test data with multiple records per day
-              Circle()
-                .fill(viewModel.backgroundColor(for: records[index]))
-                .frame(width: 8, height: 8)
-                .overlay(overlay)
-                .zIndex(zIndex(for: index))
-                .offset(x: offset(for: index, in: records.count))
-            }
-            
-            if hasMore {
-              Circle()
-                .fill(Color.white)
-                .frame(width: 7, height: 7)
-                .overlay(overlay)
-                .zIndex(zIndex(for: firstRecords.count))
-                .offset(x: offset(for: firstRecords.count, in: firstRecords.count + 1))
-            }
-          }
+        if let records = scheduleRecords(for: date), !records.isEmpty {
+          Markers(records: records)
         }
       }
     }
     .padding(.vertical, 8)
     .frame(height: 60, alignment: .top)
   }
-  
-  // TODO: Add UT?
-  func offset(for index: Int, in count: Int) -> CGFloat {
-    let offsetValue: CGFloat = 15
-    let itemOffsetValue = offsetValue / CGFloat(count)
-    let padding = count % 2 == 0 ? itemOffsetValue / 2 : 0
-    let initialOffset = -1 * CGFloat(count / 2) * itemOffsetValue + padding
-    
-    return initialOffset + itemOffsetValue * CGFloat(index)
-  }
-  
-  func zIndex(for index: Int) -> Double {
-    -Double(index)
-  }
-  
+
   func opacity(for date: Date?) -> Double {
     guard let date = date else {
       return 0
