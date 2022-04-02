@@ -122,19 +122,33 @@ struct CalendarDatePicker: View {
         
         // TODO: Extract these dots as a separate view?
         let records = scheduleRecords(for: date)
-        if !records.isEmpty {
+        let recordsToShowCount = 3
+        let hasMore = records.count > recordsToShowCount
+        let firstRecords = records.prefix(recordsToShowCount)
+        
+        if !firstRecords.isEmpty {
           // TODO: Replace with ZStack where circles are stacked on top of each other with increasing left offset
           ZStack {
+            let overlay = Circle().stroke(.white, lineWidth: 1.5).shadow(radius: 2)
+            
             // TODO: Do I need to show as many Circles as there are scheduled records, or only several first (1?) would be enough?
             ForEach(0..<records.count, id: \.self) { index in
               // TODO: Add test data with multiple records per day
-              let overlay = Circle().stroke(.white, lineWidth: 1.5).shadow(radius: 2)
               Circle()
                 .fill(viewModel.backgroundColor(for: records[index]))
                 .frame(width: 8, height: 8)
                 .overlay(overlay)
                 .zIndex(zIndex(for: index))
                 .offset(x: offset(for: index, in: records.count))
+            }
+            
+            if hasMore {
+              Circle()
+                .fill(Color.white)
+                .frame(width: 7, height: 7)
+                .overlay(overlay)
+                .zIndex(zIndex(for: firstRecords.count))
+                .offset(x: offset(for: firstRecords.count, in: firstRecords.count + 1))
             }
           }
         }
