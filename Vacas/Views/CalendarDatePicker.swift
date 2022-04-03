@@ -172,11 +172,11 @@ struct CalendarDatePicker: View {
     
     return days
   }
-  
-  struct DrawingConstants {
-    static let selectedDayFrameWidth: CGFloat = 38
-    static let selectedDayFrameOffset: CGFloat = -5
-  }
+}
+
+struct DrawingConstants {
+  static let selectedDayFrameWidth: CGFloat = 38
+  static let selectedDayFrameOffset: CGFloat = -5
 }
 
 struct CalendarDatePicker_Previews: PreviewProvider {
