@@ -11,6 +11,8 @@ struct CalendarView: View {
   @State private var selection = Date()
   @State private var developerInfoShown = false
   
+  @EnvironmentObject var viewModel: CalendarViewModel
+  
   var body: some View {
     VStack {
       HStack {
@@ -27,7 +29,7 @@ struct CalendarView: View {
       }
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 20) {
-          CalendarDatePicker(selectedDate: $selection)
+          CalendarDatePicker(selectedDate: $selection, selectionColor: viewModel.selectionColor)
         }
         .padding(.vertical)
       }
