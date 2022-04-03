@@ -33,6 +33,8 @@ struct DayDetailsView: View {
 
 struct DayDetailsView_Previews: PreviewProvider {
   static var previews: some View {
+    let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
     DayDetailsView(records: ScheduleRecord.testData)
+      .environmentObject(viewModel)
   }
 }

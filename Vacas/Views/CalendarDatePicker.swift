@@ -89,6 +89,7 @@ struct CalendarDatePicker: View {
       currentDate = theSameDateAsNowInSelectedMonth()
     }
     
+    // TODO: It's badly placed. `body` func returns 2 views.
     let records = scheduleRecords(for: selectedDate)
     DayDetailsView(records: records)
       .padding(.horizontal)
@@ -178,8 +179,10 @@ struct CalendarDatePicker: View {
   }
 }
 
-//struct CalendarDatePicker_Previews: PreviewProvider {
-//  static var previews: some View {
-//    CalendarDatePicker(selectedDate: Binding.constant(Date()))
-//  }
-//}
+struct CalendarDatePicker_Previews: PreviewProvider {
+  static var previews: some View {
+    let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
+    CalendarDatePicker(selectedDate: Binding.constant(Date()))
+      .environmentObject(viewModel)
+  }
+}
