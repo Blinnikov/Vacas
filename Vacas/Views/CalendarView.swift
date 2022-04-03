@@ -13,6 +13,10 @@ struct CalendarView: View {
   
   @EnvironmentObject var viewModel: CalendarViewModel
   
+  // TODO: Read it from some ViewModel-like store or CoreData
+  private let scheduleChangeRecords = ScheduleRecord.testData
+  private let today = Date()
+  
   var body: some View {
     VStack {
       HStack {
@@ -29,7 +33,20 @@ struct CalendarView: View {
       }
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 20) {
-          CalendarDatePicker(selectedDate: $selection, selectionColor: viewModel.selectionColor)
+          CalendarDatePicker(selectedDate: $selection) { dayItem in
+            CardView(dayItem: dayItem)
+              .background(
+                Capsule()
+                  .fill(viewModel.selectionColor)
+                  .padding(.horizontal, 8)
+                  .opacity(dayItem.date != nil && dayItem.date!.inSameDayAs(selection) ? 1 : 0)
+              )
+              .overlay(selectionOverlay(for: dayItem.date))
+          }
+          
+          let records = scheduleRecords(for: selection)
+          DayDetailsView(records: records)
+            .padding(.horizontal)
         }
         .padding(.vertical)
       }
@@ -37,6 +54,54 @@ struct CalendarView: View {
 //    .safeAreaInset(edge: .bottom) {
 //      buttons
 //    }
+  }
+  
+  func CardView(dayItem: DayItem) -> some View {
+    VStack {
+      if let date = dayItem.date, let day = dayItem.number {
+        
+        Text("\(day)")
+          .font(.title3.bold())
+          .foregroundColor(date.inSameDayAs(selection) ? .white : .primary)
+          .frame(maxWidth: .infinity)
+        
+        Spacer()
+        
+        if let records = scheduleRecords(for: date), !records.isEmpty {
+          Markers(records: records)
+        }
+      }
+    }
+    .padding(.vertical, 8)
+    .frame(height: 60, alignment: .top)
+  }
+  
+  private func selectionOverlay(for date: Date?) -> some View {
+    VStack {
+      HStack {
+        Spacer(minLength: 0)
+        Circle()
+          .stroke(viewModel.selectionColor, lineWidth: 2)
+          .frame(width: DrawingConstants.selectedDayFrameWidth)
+          .offset(y: DrawingConstants.selectedDayFrameOffset)
+          .opacity(opacity(for: date))
+        Spacer(minLength: 0)
+      }
+      Spacer()
+    }
+  }
+  
+  private func opacity(for date: Date?) -> Double {
+    guard let date = date else {
+      return 0
+    }
+    return date.inSameDayAs(today) && !date.inSameDayAs(selection) ? 1 : 0
+  }
+  
+  private func scheduleRecords(for day: Date) -> [ScheduleRecord] {
+    return self.scheduleChangeRecords.filter{ record in
+      record.date.inSameDayAs(day)
+    }
   }
   
   var buttons: some View {
@@ -69,6 +134,11 @@ struct CalendarView: View {
     .padding(.top, 10)
     .foregroundColor(.white)
     .background(.ultraThinMaterial)
+  }
+  
+  struct DrawingConstants {
+    static let selectedDayFrameWidth: CGFloat = 38
+    static let selectedDayFrameOffset: CGFloat = -5
   }
 }
 

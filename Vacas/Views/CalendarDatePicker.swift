@@ -7,18 +7,22 @@
 
 import SwiftUI
 
-struct CalendarDatePicker: View {
+fileprivate let StubDayNumber = -1
+
+struct CalendarDatePicker<DayItemRenderer: View>: View {
   // TODO: support internationalization - weeks that start from Monday
   // TODO: support localization - I do not only want these day names to be in English
   // TODO: date formatters - Mon vs Monday vs M ?
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  let today = Date()
   
   @Binding var selectedDate: Date
-  let selectionColor: Color
+  // TODO: Provide default implementation
+  // If I want to distribute this as a opensource component,
+  // I don't to have to require users to do some basic things like create selection UI.
+  // This component should work out of the box.
+  @ViewBuilder let dayRenderer: (DayItem) -> DayItemRenderer
   @State private var currentDate = Date()
   @State private var selectedMonthOffset = 0
-  private let scheduleChangeRecords = ScheduleRecord.testData
   
   var body: some View {
     VStack(spacing: 35) {
@@ -67,14 +71,7 @@ struct CalendarDatePicker: View {
       let columns = Array(repeating: GridItem(.flexible()), count: 7)
       LazyVGrid(columns: columns, spacing: 15) {
         ForEach(allDaysOfSelectedMonth()) { item in
-          CardView(dayItem: item)
-            .background(
-              Capsule()
-                .fill(selectionColor)
-                .padding(.horizontal, 8)
-                .opacity(item.date != nil && item.date!.inSameDayAs(selectedDate) ? 1 : 0)
-            )
-            .overlay(selectionOverlay(for: item.date))
+          dayRenderer(item)
             .onTapGesture {
               guard let date = item.date else {
                 return
@@ -87,67 +84,6 @@ struct CalendarDatePicker: View {
     .onChange(of: selectedMonthOffset) { _ in
       currentDate = theSameDateAsNowInSelectedMonth()
     }
-    
-    // TODO: It's badly placed. `body` func returns 2 views.
-    let records = scheduleRecords(for: selectedDate)
-    DayDetailsView(records: records)
-      .padding(.horizontal)
-  }
-  
-  func selectionOverlay(for date: Date?) -> some View {
-    VStack {
-      HStack {
-        Spacer(minLength: 0)
-        Circle()
-          .stroke(selectionColor, lineWidth: 2)
-          .frame(width: DrawingConstants.selectedDayFrameWidth)
-          .offset(y: DrawingConstants.selectedDayFrameOffset)
-          .opacity(opacity(for: date))
-        Spacer(minLength: 0)
-      }
-      Spacer()
-    }
-  }
-  
-  func CardView(dayItem: DayItem) -> some View {
-    VStack {
-      if let date = dayItem.date, let day = dayItem.number {
-        
-        Text("\(day)")
-          .font(.title3.bold())
-          .foregroundColor(date.inSameDayAs(selectedDate) ? .white : .primary)
-          .frame(maxWidth: .infinity)
-        
-        Spacer()
-        
-        if let records = scheduleRecords(for: date), !records.isEmpty {
-          Markers(records: records)
-        }
-      }
-    }
-    .padding(.vertical, 8)
-    .frame(height: 60, alignment: .top)
-  }
-
-  func opacity(for date: Date?) -> Double {
-    guard let date = date else {
-      return 0
-    }
-    return date.inSameDayAs(today) && !date.inSameDayAs(selectedDate) ? 1 : 0
-  }
-  
-  func scheduleRecords(for day: Date) -> [ScheduleRecord] {
-    return self.scheduleChangeRecords.filter{ record in
-      record.date.inSameDayAs(day)
-    }
-  }
-  
-  func hasScheduleRecord(for day: Date?) -> Bool {
-    guard let day = day else {
-      return false
-    }
-    
-    return !scheduleRecords(for: day).isEmpty
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
@@ -166,22 +102,23 @@ struct CalendarDatePicker: View {
     let firstWeekDay = calendar.component(.weekday, from: days.first?.date ?? Date())
     
     for _ in 0..<firstWeekDay - 1 {
-      days.insert(DayItem(number: -1, date: nil), at: 0)
+      days.insert(DayItem(number: StubDayNumber, date: nil), at: 0)
     }
     
     return days
   }
 }
 
-struct DrawingConstants {
-  static let selectedDayFrameWidth: CGFloat = 38
-  static let selectedDayFrameOffset: CGFloat = -5
-}
-
 struct CalendarDatePicker_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
-    CalendarDatePicker(selectedDate: Binding.constant(Date()), selectionColor: .red)
-      .environmentObject(viewModel)
+    CalendarDatePicker(selectedDate: Binding.constant(Date())) { dayItem in
+      if dayItem.number != StubDayNumber {
+        Text("\(dayItem.number)")
+      } else {
+        Text("")
+      }
+    }
+    .environmentObject(viewModel)
   }
 }
