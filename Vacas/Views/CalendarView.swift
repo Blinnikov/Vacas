@@ -46,9 +46,12 @@ struct CalendarView: View {
               .overlay(selectionOverlay(for: dayItem.date))
           }
           
-          let records = scheduleRecords(for: selection)
-          DayDetailsView(records: records)
-            .padding(.horizontal)
+          // TODO: Do not show when selected month != current month
+          if visibleMonth == 0 {
+            let records = scheduleRecords(for: selection)
+            DayDetailsView(records: records)
+              .padding(.horizontal)
+          }
         }
         .padding(.vertical)
       }
