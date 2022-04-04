@@ -16,13 +16,21 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   
   @Binding var selectedDate: Date
+  @Binding var visibleMonthOffset: Int
   // TODO: Provide default implementation
   // If I want to distribute this as a opensource component,
   // I don't to have to require users to do some basic things like create selection UI.
   // This component should work out of the box.
-  @ViewBuilder let dayRenderer: (DayItem) -> DayItemRenderer
-  @State private var currentDate = Date()
-  @State private var selectedMonthOffset = 0
+  private let dayRenderer: (DayItem) -> DayItemRenderer
+  @State private var currentDate: Date
+  
+  init(selection: Binding<Date>, visibleMonth: Binding<Int>, @ViewBuilder dayRenderer: @escaping (DayItem) -> DayItemRenderer) {
+    self._selectedDate = selection
+    self._visibleMonthOffset = visibleMonth
+    self.dayRenderer = dayRenderer
+    
+    self._currentDate = State(initialValue: Date().theSameDay(in: visibleMonth.wrappedValue))
+  }
   
   var body: some View {
     VStack(spacing: 35) {
@@ -78,6 +86,7 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
                 return
               }
               selectedDate = date
+              visibleMonthOffset = 0
             }
         }
       }
@@ -85,12 +94,12 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
   }
   
   func changeSelectedMonth(offset: Int) {
-    selectedMonthOffset += offset
+    visibleMonthOffset += offset
     currentDate = theSameDateAsNowInSelectedMonth()
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
-    Date().theSameDay(in: self.selectedMonthOffset)
+    selectedDate.theSameDay(in: self.visibleMonthOffset)
   }
   
   func allDaysOfSelectedMonth() -> [DayItem] {
@@ -114,7 +123,10 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
 
 struct CalendarDatePicker_Previews: PreviewProvider {
   static var previews: some View {
-    CalendarDatePicker(selectedDate: Binding.constant(Date())) { dayItem in
+    CalendarDatePicker(
+      selection: Binding.constant(Date()),
+      visibleMonth: Binding.constant(-1)
+    ) { dayItem in
       if dayItem.number != StubDayNumber {
         Text("\(dayItem.number)")
       } else {
