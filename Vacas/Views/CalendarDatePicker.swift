@@ -40,16 +40,17 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
         
         Spacer(minLength: 0)
         
+        // TODO: Add swipe gestures to shitch months
         Button {
           withAnimation {
-            selectedMonthOffset -= 1
+            changeSelectedMonth(offset: -1)
           }
         } label: {
           Image(systemName: "chevron.left")
         }
         Button {
           withAnimation {
-            selectedMonthOffset += 1
+            changeSelectedMonth(offset: 1)
           }
         } label: {
           Image(systemName: "chevron.right")
@@ -81,9 +82,11 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
         }
       }
     }
-    .onChange(of: selectedMonthOffset) { _ in
-      currentDate = theSameDateAsNowInSelectedMonth()
-    }
+  }
+  
+  func changeSelectedMonth(offset: Int) {
+    selectedMonthOffset += offset
+    currentDate = theSameDateAsNowInSelectedMonth()
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
@@ -111,7 +114,6 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
 
 struct CalendarDatePicker_Previews: PreviewProvider {
   static var previews: some View {
-    let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
     CalendarDatePicker(selectedDate: Binding.constant(Date())) { dayItem in
       if dayItem.number != StubDayNumber {
         Text("\(dayItem.number)")
@@ -119,6 +121,5 @@ struct CalendarDatePicker_Previews: PreviewProvider {
         Text("")
       }
     }
-    .environmentObject(viewModel)
   }
 }
