@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
   @State private var selection = Date()
-  @State private var visibleMonth = 0
+  @State private var visibleDate = Date().theSameDay(in: -1)
   @State private var developerInfoShown = false
   
   @EnvironmentObject var viewModel: CalendarViewModel
@@ -35,7 +35,7 @@ struct CalendarView: View {
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 20) {
           // TODO: Maybe visible date would be a better option, to think over it
-          CalendarDatePicker(selection: $selection, visibleMonth: $visibleMonth) { dayItem in
+          CalendarDatePicker(selection: $selection, visibleDate: $visibleDate) { dayItem in
             CardView(dayItem: dayItem)
               .background(
                 Capsule()
@@ -47,7 +47,7 @@ struct CalendarView: View {
           }
           
           // TODO: Do not show when selected month != current month
-          if visibleMonth == 0 {
+          if visibleDate.monthsOffset(from: selection) == 0 {
             let records = scheduleRecords(for: selection)
             DayDetailsView(records: records)
               .padding(.horizontal)

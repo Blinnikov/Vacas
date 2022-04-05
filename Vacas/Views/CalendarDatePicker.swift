@@ -16,20 +16,20 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   
   @Binding var selectedDate: Date
-  @Binding var visibleMonthOffset: Int
+  @Binding var visibleDate: Date
+  @State private var visibleMonthOffset: Int
   // TODO: Provide default implementation
   // If I want to distribute this as a opensource component,
   // I don't to have to require users to do some basic things like create selection UI.
   // This component should work out of the box.
   private let dayRenderer: (DayItem) -> DayItemRenderer
-  @State private var currentDate: Date
   
-  init(selection: Binding<Date>, visibleMonth: Binding<Int>, @ViewBuilder dayRenderer: @escaping (DayItem) -> DayItemRenderer) {
+  init(selection: Binding<Date>, visibleDate: Binding<Date>, @ViewBuilder dayRenderer: @escaping (DayItem) -> DayItemRenderer) {
     self._selectedDate = selection
-    self._visibleMonthOffset = visibleMonth
+    self._visibleDate = visibleDate
+    let offset = visibleDate.wrappedValue.monthsOffset(from: selection.wrappedValue)
+    self._visibleMonthOffset = State(initialValue: offset)
     self.dayRenderer = dayRenderer
-    
-    self._currentDate = State(initialValue: Date().theSameDay(in: visibleMonth.wrappedValue))
   }
   
   var body: some View {
@@ -38,11 +38,11 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
       // TODO: Extract as headline view?
       HStack(spacing: 20) {
         VStack(alignment: .leading, spacing: 10) {
-          Text(self.currentDate.yearString)
+          Text(self.visibleDate.yearString)
             .font(.caption)
             .fontWeight(.semibold)
           
-          Text(self.currentDate.monthString)
+          Text(self.visibleDate.monthString)
             .font(.title.bold())
         }
         
@@ -95,7 +95,7 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
   
   func changeSelectedMonth(offset: Int) {
     visibleMonthOffset += offset
-    currentDate = theSameDateAsNowInSelectedMonth()
+    visibleDate = theSameDateAsNowInSelectedMonth()
   }
   
   func theSameDateAsNowInSelectedMonth() -> Date {
@@ -123,9 +123,12 @@ struct CalendarDatePicker<DayItemRenderer: View>: View {
 
 struct CalendarDatePicker_Previews: PreviewProvider {
   static var previews: some View {
+    let selection = Binding.constant(Date())
+    let visibleDate = Binding.constant(selection.wrappedValue.theSameDay(in: -1))
+    
     CalendarDatePicker(
-      selection: Binding.constant(Date()),
-      visibleMonth: Binding.constant(-1)
+      selection: selection,
+      visibleDate: visibleDate
     ) { dayItem in
       if dayItem.number != StubDayNumber {
         Text("\(dayItem.number)")
