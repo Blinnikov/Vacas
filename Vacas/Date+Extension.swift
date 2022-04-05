@@ -9,6 +9,16 @@ import Foundation
 
 extension Date {
   
+  func monthsOffset(from date: Date) -> Int {
+    let calendar = Calendar.current
+    let selfYear = calendar.component(.year, from: self)
+    let dateYear = calendar.component(.year, from: date)
+    let selfMonth = calendar.component(.month, from: self)
+    let dateMonth = calendar.component(.month, from: date)
+    
+    return 12 * (selfYear - dateYear) + selfMonth - dateMonth
+  }
+  
   static func from(_ dateString: String) -> Date {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"

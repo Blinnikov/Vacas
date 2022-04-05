@@ -41,13 +41,29 @@ class VacasTests: XCTestCase {
   }
   
   func testWorkingDaysCountThisYearMusyBeGreaterThanZero() {
-    let count = dateService.workingDaysThisYear()
+    let count = dateService.workingDaysThisYear
     XCTAssertGreaterThan(count, 0)
   }
   
   func testWorkingDaysCountIsCorrect() {
-    let count1 = dateService.workingDaysThisYear()
+    let count1 = dateService.workingDaysThisYear
     let count2 = dateService.workingDays(between: dateService.firstDayOfCurrentyear, and: Date())
     XCTAssertEqual(count1, count2)
+  }
+  
+  func testMonthsDifferenceBetweenTwoDatesInTheSameMonth() {
+    XCTAssertEqual(Date.from("2022-01-31").monthsOffset(from: Date.from("2022-01-01")), 0)
+    XCTAssertEqual(Date.from("2022-01-01").monthsOffset(from: Date.from("2022-01-31")), 0)
+    XCTAssertEqual(Date.from("2022-01-02").monthsOffset(from: Date.from("2022-01-01")), 0)
+    XCTAssertEqual(Date.from("2022-01-31").monthsOffset(from: Date.from("2022-01-30")), 0)
+  }
+  
+  func testMonthsDifferenceBetweenTwoDatesInDifferentMonths() {
+    XCTAssertEqual(Date.from("2022-02-01").monthsOffset(from: Date.from("2022-01-31")), 1)
+    XCTAssertEqual(Date.from("2022-01-31").monthsOffset(from: Date.from("2022-02-01")), -1)
+    XCTAssertEqual(Date.from("2022-01-01").monthsOffset(from: Date.from("2022-12-31")), -11)
+    XCTAssertEqual(Date.from("2022-01-01").monthsOffset(from: Date.from("2021-12-31")), 1)
+    XCTAssertEqual(Date.from("2022-02-01").monthsOffset(from: Date.from("2022-01-01")), 1)
+    XCTAssertEqual(Date.from("2022-03-01").monthsOffset(from: Date.from("2022-01-01")), 2)
   }
 }
