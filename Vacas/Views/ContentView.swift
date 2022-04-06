@@ -35,7 +35,11 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
+    let settingStore = SettingsStore(named: "Preview")
+    let viewModel = CalendarViewModel(with: settingStore)
+    
     ContentView()
-      .environmentObject(SettingsStore(named: "Preview"))
+      .environmentObject(settingStore)
+      .environmentObject(viewModel)
   }
 }
