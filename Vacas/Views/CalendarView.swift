@@ -34,7 +34,6 @@ struct CalendarView: View {
       }
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 20) {
-          // TODO: Maybe visible date would be a better option, to think over it
           CalendarDatePicker(selection: $selection, visibleDate: $visibleDate) { dayItem in
             CardView(dayItem: dayItem)
               .background(
@@ -46,7 +45,6 @@ struct CalendarView: View {
               .overlay(selectionOverlay(for: dayItem.date))
           }
           
-          // TODO: Do not show when selected month != current month
           if visibleDate.monthsOffset(from: selection) == 0 {
             let records = scheduleRecords(for: selection)
             DayDetailsView(records: records)
