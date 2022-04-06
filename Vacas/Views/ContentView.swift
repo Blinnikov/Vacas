@@ -12,6 +12,19 @@ struct ContentView: View {
   
   var body: some View {
     TabView {
+      StatisticsView()
+        .tabItem {
+          VStack {
+//            Image(systemName: "circle.hexagongrid.circle")
+//            Image(systemName: "circle.hexagongrid.circle.fill")
+//            Image(systemName: "circle.circle.fill")
+//            Image(systemName: "lines.measurement.horizontal")
+            Image(systemName: "circle.hexagongrid")
+            Text("Statistics")
+          }
+        }
+        .tag(0)
+      
       CalendarView()
         .tabItem {
           VStack {
@@ -19,7 +32,7 @@ struct ContentView: View {
             Text("Calendar")
           }
         }
-        .tag(0)
+        .tag(1)
       
       SettingsView()
         .tabItem {
@@ -28,7 +41,7 @@ struct ContentView: View {
             Text("Settings")
           }
         }
-        .tag(1)
+        .tag(2)
     }
   }
 }
@@ -36,10 +49,12 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     let settingStore = SettingsStore(named: "Preview")
-    let viewModel = CalendarViewModel(with: settingStore)
+    let statistics = StatisticsViewModel(with: settingStore)
+    let calendar = CalendarViewModel(with: settingStore)
     
     ContentView()
       .environmentObject(settingStore)
-      .environmentObject(viewModel)
+      .environmentObject(statistics)
+      .environmentObject(calendar)
   }
 }
