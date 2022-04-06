@@ -29,7 +29,7 @@ struct CalendarView: View {
         }
         .padding(.horizontal)
         .popover(isPresented: $developerInfoShown) {
-          DeveloperInfoView()
+          StatisticsView()
         }
       }
       ScrollView(.vertical, showsIndicators: false) {

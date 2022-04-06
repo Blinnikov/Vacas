@@ -1,5 +1,5 @@
 //
-//  DeveloperInfoView.swift
+//  StatisticsView.swift
 //  Vacas
 //
 //  Created by Igor Blinnikov on 14.03.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DeveloperInfoView: View {
+struct StatisticsView: View {
   @EnvironmentObject var statistics: StatisticsViewModel
   
   var body: some View {
@@ -46,7 +46,7 @@ struct DeveloperInfoView_Previews: PreviewProvider {
   static var previews: some View {
     let settingStore = SettingsStore(named: "Preview")
     let statistics = StatisticsViewModel(with: settingStore)
-    DeveloperInfoView()
+    StatisticsView()
       .environmentObject(statistics)
   }
 }
