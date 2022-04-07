@@ -20,18 +20,6 @@ struct CalendarView: View {
   
   var body: some View {
     VStack {
-      HStack {
-        Spacer()
-        Button {
-          developerInfoShown.toggle()
-        } label: {
-          Image(systemName: "ant.circle")
-        }
-        .padding(.horizontal)
-        .popover(isPresented: $developerInfoShown) {
-          StatisticsView()
-        }
-      }
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: 20) {
           CalendarDatePicker(selection: $selection, visibleDate: $visibleDate) { dayItem in
