@@ -15,10 +15,6 @@ struct ContentView: View {
       StatisticsView()
         .tabItem {
           VStack {
-//            Image(systemName: "circle.hexagongrid.circle")
-//            Image(systemName: "circle.hexagongrid.circle.fill")
-//            Image(systemName: "circle.circle.fill")
-//            Image(systemName: "lines.measurement.horizontal")
             Image(systemName: "circle.hexagongrid")
             Text("Statistics")
           }

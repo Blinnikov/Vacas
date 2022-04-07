@@ -6,13 +6,23 @@
 //
 
 import SwiftUI
+import Combine
 
 class StatisticsViewModel: ObservableObject {
-  private let settingsStore: SettingsStore
+  @Published private var settingsStore: SettingsStore
   private let dateService = DateService()
+  
+  var anyCancellable: AnyCancellable? = nil
   
   init(with settingStore: SettingsStore) {
     self.settingsStore = settingStore
+  
+    // NOTE: It's a hack to make nested `ObservableObject`s work.
+    // It just subscribes to nested object change event and rethrows updates further.
+    // Thanks to https://stackoverflow.com/questions/58406287/how-to-tell-swiftui-views-to-bind-to-nested-observableobjects
+    anyCancellable = settingStore.objectWillChange.sink { [weak self] (_) in
+      self?.objectWillChange.send()
+    }
   }
   
   private var totalVacationDaysPerYear: Int {
