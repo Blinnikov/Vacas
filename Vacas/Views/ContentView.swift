@@ -11,7 +11,7 @@ struct ContentView: View {
   @State var selectedTab = 0
   
   var body: some View {
-    TabView {
+    TabView(selection: $selectedTab) {
       StatisticsView()
         .tabItem {
           VStack {
