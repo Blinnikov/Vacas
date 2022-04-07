@@ -23,13 +23,15 @@ struct StatisticsView: View {
           Spacer()
         }
         
-        listItem(title: "Working days this year", statistics.workingDaysThisYear)
-        
-        listItem(title: "Vacation days gained", statistics.vacationDaysGained)
-        
-        listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
-        
-        listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
+        Group {
+          listItem(title: "Working days this year", statistics.workingDaysThisYear)
+          
+          listItem(title: "Vacation days gained", statistics.vacationDaysGained)
+          
+          listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
+          
+          listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
+        }
         
         Divider()
         
@@ -37,11 +39,13 @@ struct StatisticsView: View {
         
         Divider()
         
-        listItem(title: "Width", Int(proxy.size.width))
+        Group {
+          listItem(title: "Width", Int(proxy.size.width))
+          
+          listItem(title: "Height", Int(proxy.size.height))
+        }
         
-        listItem(title: "Height", Int(proxy.size.height))
-        
-//        Spacer()
+        Spacer()
       }
     }
     .border(Color.red, width: 2)
