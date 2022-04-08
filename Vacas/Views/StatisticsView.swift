@@ -12,51 +12,51 @@ struct StatisticsView: View {
   
   var body: some View {
     GeometryReader { proxy in
-      VStack {
-        HStack {
-          // TODO: Get rid of this title
-          // Make some cool representative start screen
-          Text("Statistics")
-            .font(.title)
-            .padding()
-          
+      ZStack {
+        VStack {
           Spacer()
+          HStack {
+            Spacer()
+            // TODO: Get rid of this title
+            // Make some cool representative start screen
+            Text("Statistics")
+              .font(.title)
+              .padding(.horizontal)
+              .padding(.bottom, 2)
+          }
+          
+          Group {
+            listItem(title: "Working days this year", statistics.workingDaysThisYear)
+            
+            listItem(title: "Vacation days gained", statistics.vacationDaysGained)
+            
+            listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
+            
+            listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
+          }
+          
+          Divider()
+          
+          VStack {
+            listItem(title: "Width", Int(proxy.size.width))
+            
+            listItem(title: "Height", Int(proxy.size.height))
+            Divider()
+          }
+          .padding(.bottom)
         }
-        
-        Group {
-          listItem(title: "Working days this year", statistics.workingDaysThisYear)
-          
-          listItem(title: "Vacation days gained", statistics.vacationDaysGained)
-          
-          listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
-          
-          listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
-        }
-        
-        Divider()
         
         circle(in: proxy.size)
-        
-        Divider()
-        
-        Group {
-          listItem(title: "Width", Int(proxy.size.width))
-          
-          listItem(title: "Height", Int(proxy.size.height))
-        }
-        
-        Spacer()
       }
     }
-    .border(Color.red, width: 2)
   }
   
   private func circle(in size: CGSize) -> some View {
-    let CircleRatio = 0.5
+    let CircleRatio = 0.7
     let CircleLineWidth: CGFloat = 15
     let CircleShadow: CGFloat = 10
     let CircleColor = Color.green
-    let CircleFontSize: CGFloat = 60
+    let CircleFontSize: CGFloat = CircleRatio * 100 + 10
     
     let circleWidth = CircleRatio * size.width
     
@@ -67,7 +67,6 @@ struct StatisticsView: View {
         .frame(width: circleWidth, height: circleWidth)
         .overlay(overlay)
       
-      // FIX: Shows wrong count on Main tab
       Text("\(statistics.vacationDaysLeftThisYear)")
         .foregroundColor(CircleColor)
         .font(.system(size: CircleFontSize))
@@ -76,11 +75,11 @@ struct StatisticsView: View {
   
   func listItem(title: String, _ amount: Int) -> some View {
     HStack {
-      Text("\(title)")
       Spacer()
-      Text("\(amount)")
+      Text("\(title)").font(.footnote)
+      Text("\(amount)").font(.footnote).foregroundColor(.gray)
     }
-    .padding()
+    .padding(.horizontal)
   }
   }
 
