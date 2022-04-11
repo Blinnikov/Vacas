@@ -9,12 +9,12 @@ import Foundation
 
 struct ScheduleRecord: Identifiable {
   let id = UUID()
-  let title: String
+  var title: String
   let date: Date
-  let type: ScheduleChangeType
+  var type: ScheduleChangeType
 }
 
-enum ScheduleChangeType {
+enum ScheduleChangeType: Hashable {
   case overtime
   case timeOff(TimeOffType)
 }
