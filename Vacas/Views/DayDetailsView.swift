@@ -11,14 +11,34 @@ struct DayDetailsView: View {
   // TODO: Rename to something generic like `events`?
   // Introduce new view type that needs to be mapped into
   let records: [ScheduleRecord]
+  let canAdd = true
+  
+  @State private var addRecordFormShown = false
   
   var body: some View {
     VStack(spacing: 15) {
-      Text("Records")
-        .font(.title2.bold())
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.bottom, 20)
-//        .padding(.vertical, 20)
+      HStack(alignment: .center) {
+        Text("Records")
+          .font(.title2.bold())
+          .frame(maxWidth: .infinity, alignment: .leading)
+        
+        if canAdd {
+          Button {
+            withAnimation {
+              addRecordFormShown = true
+            }
+          } label: {
+            Image(systemName: "plus.square.on.square")
+//            Image(systemName: "calendar.badge.plus")
+//            Image(systemName: "plus.circle")
+          }
+        }
+      }
+      .padding(.bottom, 20)
+      
+      if canAdd && addRecordFormShown {
+        Text("Add new record goes here..")
+      }
       
       if records.isEmpty {
         Text("No records for the day")
@@ -34,7 +54,8 @@ struct DayDetailsView: View {
 struct DayDetailsView_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
-    DayDetailsView(records: ScheduleRecord.testData)
+    let records = Array(ScheduleRecord.testData.prefix(3))
+    DayDetailsView(records: records)
       .environmentObject(viewModel)
   }
 }
