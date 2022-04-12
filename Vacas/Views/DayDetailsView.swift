@@ -22,7 +22,8 @@ struct DayDetailsView: View {
           .font(.title2.bold())
           .frame(maxWidth: .infinity, alignment: .leading)
         
-        if canAdd {
+        // TODO: Add proper animation for this button to disappear smoothly
+        if canAdd && !addRecordFormShown {
           Button {
             withAnimation {
               addRecordFormShown = true
@@ -37,7 +38,7 @@ struct DayDetailsView: View {
       .padding(.bottom, 20)
       
       if canAdd && addRecordFormShown {
-        Text("Add new record goes here..")
+        AddScheduleRecordView()
       }
       
       if records.isEmpty {
