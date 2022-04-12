@@ -10,8 +10,6 @@ import SwiftUI
 struct ScheduleRecordView: View {
   let record: ScheduleRecord
   
-  @EnvironmentObject var viewModel: CalendarViewModel
-  
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
       Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
@@ -23,7 +21,7 @@ struct ScheduleRecordView: View {
     .padding(.horizontal)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(
-      viewModel.backgroundColor(for: record)
+      record.backgroundColor
         .cornerRadius(10)
     )
   }

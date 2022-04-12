@@ -20,8 +20,6 @@ struct Markers: View {
     self.totalCount = hasMore ? recordsToShowCount + 1 : records.count
   }
   
-  @EnvironmentObject var viewModel: CalendarViewModel
-  
   var body: some View {
     if records.isEmpty {
       EmptyView()
@@ -32,7 +30,7 @@ struct Markers: View {
       
       ForEach(0..<records.count, id: \.self) { index in
         Circle()
-          .fill(viewModel.backgroundColor(for: records[index]))
+          .fill(records[index].backgroundColor)
           .frame(width: 8, height: 8)
           .overlay(overlay)
           .zIndex(zIndex(for: index))
