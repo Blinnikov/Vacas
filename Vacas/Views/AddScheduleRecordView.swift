@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct AddScheduleRecordView: View {
-  @Binding var record: ScheduleRecord
-  
-  @State var type = ScheduleChangeType.timeOff(.holiday)
+  @State var record: ScheduleRecord = ScheduleRecord(title: "", date: Date(), type: .timeOff(.vacation))
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -33,7 +31,7 @@ struct AddScheduleRecordView: View {
   
   var typeSelector: some View {
     Menu {
-      Picker(selection: $type, label: Image(systemName: "plus")){
+      Picker(selection: $record.type, label: Image(systemName: "plus")){
         Text("Overtime").tag(ScheduleChangeType.overtime)
         Text("Vacation").tag(ScheduleChangeType.timeOff(.vacation))
         Text("Holiday").tag(ScheduleChangeType.timeOff(.holiday))
@@ -45,7 +43,7 @@ struct AddScheduleRecordView: View {
       let overlay = Circle().stroke(.white, lineWidth: 2).shadow(radius: 2)
       
       Circle()
-        .fill(ScheduleRecord(title: record.title, date: record.date, type: type).backgroundColor)
+        .fill(record.backgroundColor)
         .frame(width: 24, height: 24)
         .overlay(overlay)
     }
@@ -54,7 +52,6 @@ struct AddScheduleRecordView: View {
 
 struct AddScheduleRecordView_Previews: PreviewProvider {
   static var previews: some View {
-    let record = ScheduleRecord(title: "", date: Date(), type: .timeOff(.vacation))
-    AddScheduleRecordView(record: Binding.constant(record))
+    AddScheduleRecordView()
   }
 }
