@@ -110,6 +110,17 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		7873511128062CC20080656B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */,
+				7874037C277B770600576267 /* Date+Extension.swift */,
+				780D82B927B9784B001F2C7F /* Settings+Extension.swift */,
+				78803CA027BC4BE500724746 /* Appearance+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		78740378277B715700576267 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,13 +173,10 @@
 				78740378277B715700576267 /* Model */,
 				78493D6F27BAB819001CCAB9 /* ViewModels */,
 				78740379277B716400576267 /* Views */,
+				7873511128062CC20080656B /* Extensions */,
 				78CDD84D2773D0430037D098 /* VacasApp.swift */,
 				78CDD8512773D0440037D098 /* Assets.xcassets */,
 				78CDD8532773D0440037D098 /* Preview Content */,
-				78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */,
-				7874037C277B770600576267 /* Date+Extension.swift */,
-				780D82B927B9784B001F2C7F /* Settings+Extension.swift */,
-				78803CA027BC4BE500724746 /* Appearance+Extension.swift */,
 			);
 			path = Vacas;
 			sourceTree = "<group>";
