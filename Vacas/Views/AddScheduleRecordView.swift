@@ -20,12 +20,32 @@ struct AddScheduleRecordView: View {
       
       TextField("Enter a title", text: $record.title)
         .font(.title2.bold())
+      
+      HStack {
+        Spacer()
+        
+        Button {
+          
+        } label: {
+          buttonLabel(systemName: "calendar.badge.plus")
+        }
+        .padding(.trailing, 4)
+        
+        Button {
+          
+        } label: {
+          buttonLabel(systemName: "xmark", discard: true)
+        }
+        
+      }
     }
     .padding(.vertical, 10)
     .padding(.horizontal)
     .frame(maxWidth: .infinity, alignment: .leading)
     .background(
-      Color.bloodOrange
+      RoundedRectangle(cornerRadius: 10)
+        .fill(Color.snow)
+        .shadow(radius: 5)
     )
   }
   
@@ -44,9 +64,26 @@ struct AddScheduleRecordView: View {
       
       Circle()
         .fill(record.backgroundColor)
-        .frame(width: 24, height: 24)
+        .frame(width: DrawingConstants.CircleButtonSize, height: DrawingConstants.CircleButtonSize)
         .overlay(overlay)
     }
+  }
+  
+  func buttonLabel(systemName: String, discard: Bool = false) -> some View {
+    
+    ZStack {
+      Circle()
+        .fill(.white)
+        .frame(width: DrawingConstants.CircleButtonSize, height: DrawingConstants.CircleButtonSize)
+        .shadow(radius: 2)
+      
+      Image(systemName: systemName)
+        .foregroundColor(discard ? .red : .accentColor)
+    }
+  }
+  
+  private struct DrawingConstants {
+    static let CircleButtonSize: CGFloat = 34
   }
 }
 
