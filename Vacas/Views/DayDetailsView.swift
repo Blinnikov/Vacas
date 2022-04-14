@@ -38,7 +38,9 @@ struct DayDetailsView: View {
       .padding(.bottom, 20)
       
       if canAdd && addRecordFormShown {
-        AddScheduleRecordView()
+        AddScheduleRecordView {
+          addRecordFormShown = false
+        }
       }
       
       if records.isEmpty {
