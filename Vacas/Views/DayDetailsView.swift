@@ -38,7 +38,11 @@ struct DayDetailsView: View {
       .padding(.bottom, 20)
       
       if canAdd && addRecordFormShown {
-        AddScheduleRecordView {
+        // TODO: Pass selected day as a param
+        AddScheduleRecordView { record in
+          print(record)
+          addRecordFormShown = false
+        } onDismiss: {
           addRecordFormShown = false
         }
       }

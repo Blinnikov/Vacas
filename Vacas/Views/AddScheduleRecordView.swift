@@ -10,7 +10,8 @@ import SwiftUI
 struct AddScheduleRecordView: View {
   @State var record: ScheduleRecord = ScheduleRecord(title: "", date: Date(), type: .timeOff(.vacation))
   
-  let onDismiss: () -> ()
+  let onSave: (_ record: ScheduleRecord) -> Void
+  let onDismiss: () -> Void
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -27,7 +28,7 @@ struct AddScheduleRecordView: View {
         Spacer()
         
         Button {
-          
+          onSave(record)
         } label: {
           buttonLabel(systemName: "calendar.badge.plus")
         }
@@ -93,6 +94,6 @@ struct AddScheduleRecordView: View {
 
 struct AddScheduleRecordView_Previews: PreviewProvider {
   static var previews: some View {
-    AddScheduleRecordView(onDismiss: {})
+    AddScheduleRecordView(onSave: { _ in }, onDismiss: {})
   }
 }
