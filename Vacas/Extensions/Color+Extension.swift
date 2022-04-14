@@ -11,6 +11,7 @@ extension Color {
   static let bloodOrange = Self.init(rgbaColor: .bloodOrange)
   static let peach = Self.init(rgbaColor: .peach)
   static let plum = Self.init(rgbaColor: .plum)
+  static let snow = Self.init(rgbaColor: .snow)
   
   init(rgbaColor rgba: RGBAColor) {
     self.init(.sRGB, red: rgba.red, green: rgba.green, blue: rgba.blue, opacity: rgba.alpha)

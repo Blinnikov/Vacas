@@ -36,6 +36,7 @@ extension RGBAColor {
   static var bloodOrange = RGBAColor(red: 0.994, green: 0.51, blue: 0.515, alpha: 1.0)
   static let peach = RGBAColor(red: 0.997, green: 0.743, blue: 0.515, alpha: 1.0)
   static let plum = RGBAColor(red: 0.568, green: 0.495, blue: 0.967, alpha: 1.0)
+  static let snow = RGBAColor(red: 0.945, green: 0.953, blue: 0.969, alpha: 1.0)
 }
 
 enum Appearance: String, Codable {
