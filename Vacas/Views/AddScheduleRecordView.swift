@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct AddScheduleRecordView: View {
-  @State var record: ScheduleRecord = ScheduleRecord(title: "", date: Date(), type: .timeOff(.vacation))
+  @State private var record: ScheduleRecord
   
-  let onSave: (_ record: ScheduleRecord) -> Void
-  let onDismiss: () -> Void
+  private let onSave: (_ record: ScheduleRecord) -> Void
+  private let onDismiss: () -> Void
+  
+  init(day: Date, onSave: @escaping (ScheduleRecord) -> Void, onDismiss: @escaping () -> Void) {
+    self._record = State(initialValue: ScheduleRecord(title: "", date: day, type: .timeOff(.vacation)))
+    self.onSave = onSave
+    self.onDismiss = onDismiss
+  }
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -94,6 +100,6 @@ struct AddScheduleRecordView: View {
 
 struct AddScheduleRecordView_Previews: PreviewProvider {
   static var previews: some View {
-    AddScheduleRecordView(onSave: { _ in }, onDismiss: {})
+    AddScheduleRecordView(day: Date(), onSave: { _ in }, onDismiss: {})
   }
 }

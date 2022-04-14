@@ -35,7 +35,7 @@ struct CalendarView: View {
           
           if visibleDate.monthsOffset(from: selection) == 0 {
             let records = scheduleRecords(for: selection)
-            DayDetailsView(records: records)
+            DayDetailsView(day: selection, records: records)
               .padding(.horizontal)
           }
         }

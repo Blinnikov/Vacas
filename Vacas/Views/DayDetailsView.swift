@@ -10,7 +10,8 @@ import SwiftUI
 struct DayDetailsView: View {
   // TODO: Rename to something generic like `events`?
   // Introduce new view type that needs to be mapped into
-  let records: [ScheduleRecord]
+  let day: Date
+  var records: [ScheduleRecord]
   let canAdd = true
   
   @State private var addRecordFormShown = false
@@ -39,8 +40,10 @@ struct DayDetailsView: View {
       
       if canAdd && addRecordFormShown {
         // TODO: Pass selected day as a param
-        AddScheduleRecordView { record in
+        AddScheduleRecordView(day: day) { record in
           print(record)
+          // TODO: Should be some storage's method call, or at least `testData`
+          // records.append(record)
           addRecordFormShown = false
         } onDismiss: {
           addRecordFormShown = false
@@ -62,7 +65,7 @@ struct DayDetailsView_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
     let records = Array(ScheduleRecord.testData.prefix(3))
-    DayDetailsView(records: records)
+    DayDetailsView(day: Date(), records: records)
       .environmentObject(viewModel)
   }
 }
