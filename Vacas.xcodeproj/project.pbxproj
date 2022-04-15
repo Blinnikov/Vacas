@@ -27,6 +27,7 @@
 		78A2456027F2F33F00A7AC72 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2455F27F2F33F00A7AC72 /* CalendarViewModel.swift */; };
 		78BC9A3A2802156500F5A121 /* ScheduleRecord.TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BC9A392802156500F5A121 /* ScheduleRecord.TestData.swift */; };
 		78C4D062277D0C9500D3DEF1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */; };
+		78C5F2B32808A44300E763B0 /* ScheduleRecordsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C5F2B22808A44300E763B0 /* ScheduleRecordsStore.swift */; };
 		78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CDD84D2773D0430037D098 /* VacasApp.swift */; };
 		78CDD8502773D0430037D098 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CDD84F2773D0430037D098 /* ContentView.swift */; };
 		78CDD8522773D0440037D098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78CDD8512773D0440037D098 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		78A2455F27F2F33F00A7AC72 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		78BC9A392802156500F5A121 /* ScheduleRecord.TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecord.TestData.swift; sourceTree = "<group>"; };
 		78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		78C5F2B22808A44300E763B0 /* ScheduleRecordsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecordsStore.swift; sourceTree = "<group>"; };
 		78CDD84A2773D0430037D098 /* Vacas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vacas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78CDD84D2773D0430037D098 /* VacasApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacasApp.swift; sourceTree = "<group>"; };
 		78CDD84F2773D0430037D098 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				78493D7027BAB876001CCAB9 /* SettingsStore.swift */,
 				78F2464F27E8DCF0006515F0 /* StatisticsViewModel.swift */,
 				78A2455F27F2F33F00A7AC72 /* CalendarViewModel.swift */,
+				78C5F2B22808A44300E763B0 /* ScheduleRecordsStore.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				781712B92780D5E100CBDEFD /* ScheduleRecord.swift in Sources */,
 				7874037B277B723F00576267 /* CalendarDatePicker.swift in Sources */,
 				78F84F7827DF506000657C8E /* StatisticsView.swift in Sources */,
+				78C5F2B32808A44300E763B0 /* ScheduleRecordsStore.swift in Sources */,
 				781712BB278213E600CBDEFD /* ScheduleRecordView.swift in Sources */,
 				78740377277A206E00576267 /* SettingsView.swift in Sources */,
 				78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */,
