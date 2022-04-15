@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct VacasApp: App {
   @StateObject var settingsStore: SettingsStore
+  @StateObject var scheduleRecordsStore = ScheduleRecordsStore()
   @StateObject var statisticsViewModel: StatisticsViewModel
   @StateObject var calendarViewModel: CalendarViewModel
   
@@ -26,6 +27,7 @@ struct VacasApp: App {
       ContentView()
         .preferredColorScheme(settingsStore.settings.appearance.getColorScheme())
         .environmentObject(settingsStore) // NOTE: Can we get rid of whis? Having so many view models seems excessive
+        .environmentObject(scheduleRecordsStore)
         .environmentObject(statisticsViewModel)
         .environmentObject(calendarViewModel)
     }

@@ -15,6 +15,7 @@ struct DayDetailsView: View {
   let canAdd = true
   
   @State private var addRecordFormShown = false
+  @EnvironmentObject private var store: ScheduleRecordsStore
   
   var body: some View {
     VStack(spacing: 15) {
@@ -30,9 +31,8 @@ struct DayDetailsView: View {
               addRecordFormShown = true
             }
           } label: {
-            Image(systemName: "plus.square.on.square")
-//            Image(systemName: "calendar.badge.plus")
-//            Image(systemName: "plus.circle")
+//            Image(systemName: "plus.square.on.square")          
+            Image(systemName: "plus.circle")
           }
         }
       }
@@ -42,8 +42,7 @@ struct DayDetailsView: View {
         // TODO: Pass selected day as a param
         AddScheduleRecordView(day: day) { record in
           print(record)
-          // TODO: Should be some storage's method call, or at least `testData`
-          // records.append(record)
+          store.records.append(record)
           addRecordFormShown = false
         } onDismiss: {
           addRecordFormShown = false
@@ -54,6 +53,7 @@ struct DayDetailsView: View {
         Text("No records for the day")
       } else {
         ForEach(records) { record in
+          // TODO: Add swipe gesture to delete record 
           ScheduleRecordView(record: record)
         }
       }
@@ -64,7 +64,8 @@ struct DayDetailsView: View {
 struct DayDetailsView_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
-    let records = Array(ScheduleRecord.testData.prefix(3))
+    let store = ScheduleRecordsStore()
+    let records = Array(store.records.prefix(3))
     DayDetailsView(day: Date(), records: records)
       .environmentObject(viewModel)
   }

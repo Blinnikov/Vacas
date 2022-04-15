@@ -13,9 +13,7 @@ struct CalendarView: View {
   @State private var developerInfoShown = false
   
   @EnvironmentObject var viewModel: CalendarViewModel
-  
-  // TODO: Read it from some ViewModel-like store or CoreData
-  private let scheduleChangeRecords = ScheduleRecord.testData
+  @EnvironmentObject private var store: ScheduleRecordsStore
   private let today = Date()
   
   var body: some View {
@@ -90,7 +88,7 @@ struct CalendarView: View {
   }
   
   private func scheduleRecords(for day: Date) -> [ScheduleRecord] {
-    return self.scheduleChangeRecords.filter{ record in
+    return store.records.filter { record in
       record.date.inSameDayAs(day)
     }
   }

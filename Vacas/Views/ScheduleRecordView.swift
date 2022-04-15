@@ -12,6 +12,7 @@ struct ScheduleRecordView: View {
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
+      // TODO: Do I need it?
       Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
       
       Text(record.title)
@@ -29,6 +30,8 @@ struct ScheduleRecordView: View {
 
 struct RecordView_Previews: PreviewProvider {
   static var previews: some View {
-    ScheduleRecordView(record: ScheduleRecord.testData.first!)
+    let store = ScheduleRecordsStore()
+    let record = store.records.first!
+    ScheduleRecordView(record: record)
   }
 }
