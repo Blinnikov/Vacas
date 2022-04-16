@@ -44,12 +44,13 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    let settingStore = SettingsStore(named: "Preview")
-    let statistics = StatisticsViewModel(with: settingStore)
-    let calendar = CalendarViewModel(with: settingStore)
+    let settingsStore = SettingsStore(named: "Preview")
+    let recordsStore = ScheduleRecordsStore()
+    let statistics = StatisticsViewModel(with: settingsStore, and: recordsStore)
+    let calendar = CalendarViewModel(with: settingsStore)
     
     ContentView()
-      .environmentObject(settingStore)
+      .environmentObject(settingsStore)
       .environmentObject(statistics)
       .environmentObject(calendar)
   }

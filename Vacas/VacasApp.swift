@@ -10,16 +10,18 @@ import SwiftUI
 @main
 struct VacasApp: App {
   @StateObject var settingsStore: SettingsStore
-  @StateObject var scheduleRecordsStore = ScheduleRecordsStore()
+  @StateObject var scheduleRecordsStore: ScheduleRecordsStore
   @StateObject var statisticsViewModel: StatisticsViewModel
   @StateObject var calendarViewModel: CalendarViewModel
   
   init() {
-    let store = SettingsStore(named: "Default")
+    let settingsStore = SettingsStore(named: "Default")
+    let recordsStore = ScheduleRecordsStore()
     
-    self._settingsStore = StateObject(wrappedValue: store)
-    self._statisticsViewModel = StateObject(wrappedValue: StatisticsViewModel(with: store))
-    self._calendarViewModel = StateObject(wrappedValue: CalendarViewModel(with: store))
+    self._settingsStore = StateObject(wrappedValue: settingsStore)
+    self._scheduleRecordsStore = StateObject(wrappedValue: recordsStore)
+    self._statisticsViewModel = StateObject(wrappedValue: StatisticsViewModel(with: settingsStore, and: recordsStore))
+    self._calendarViewModel = StateObject(wrappedValue: CalendarViewModel(with: settingsStore))
   }
   
   var body: some Scene {

@@ -10,17 +10,24 @@ import Combine
 
 class StatisticsViewModel: ObservableObject {
   @Published private var settingsStore: SettingsStore
+  @Published private var recordsStore: ScheduleRecordsStore
   private let dateService = DateService()
   
-  var anyCancellable: AnyCancellable? = nil
+  var settingsCancellable: AnyCancellable? = nil
+  var recordsCancellable: AnyCancellable? = nil
   
-  init(with settingStore: SettingsStore) {
+  init(with settingStore: SettingsStore, and recordsStore: ScheduleRecordsStore) {
     self.settingsStore = settingStore
+    self.recordsStore = recordsStore
   
     // NOTE: It's a hack to make nested `ObservableObject`s work.
     // It just subscribes to nested object change event and rethrows updates further.
     // Thanks to https://stackoverflow.com/questions/58406287/how-to-tell-swiftui-views-to-bind-to-nested-observableobjects
-    anyCancellable = settingStore.objectWillChange.sink { [weak self] (_) in
+    settingsCancellable = settingStore.objectWillChange.sink { [weak self] (_) in
+      self?.objectWillChange.send()
+    }
+    
+    recordsCancellable = recordsStore.objectWillChange.sink { [weak self] (_) in
       self?.objectWillChange.send()
     }
   }
