@@ -32,7 +32,7 @@ class StatisticsViewModel: ObservableObject {
     }
   }
   
-  private var totalVacationDaysPerYear: Int {
+  var totalVacationDaysPerYear: Int {
     settingsStore.settings.vacationDaysAmount + settingsStore.settings.extraVacationDaysAmount
   }
   
@@ -42,7 +42,9 @@ class StatisticsViewModel: ObservableObject {
     // like days oof, vacations and so on.
     // `vacationDaysSpentThisYear` should be either direct projection from this store
     // or computed field based on data from this store
-    0
+    recordsStore.records.filter { record in
+      record.type == ScheduleChangeType.timeOff(.vacation)
+    }.count
   }
   
   var vacationDaysLeftThisYear: Int {
