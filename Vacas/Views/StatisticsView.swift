@@ -67,9 +67,13 @@ struct StatisticsView: View {
         .frame(width: circleWidth, height: circleWidth)
         .overlay(overlay)
       
-      Text("\(statistics.vacationDaysLeftThisYear)")
-        .foregroundColor(CircleColor)
-        .font(.system(size: CircleFontSize))
+      HStack(alignment: .firstTextBaseline) {
+        Text("\(statistics.vacationDaysLeftThisYear)")
+          .foregroundColor(CircleColor)
+          .font(.system(size: CircleFontSize))
+        Text(" / \(statistics.totalVacationDaysPerYear)")
+          .foregroundColor(CircleColor)
+      }
     }
   }
   
@@ -85,8 +89,9 @@ struct StatisticsView: View {
 
 struct DeveloperInfoView_Previews: PreviewProvider {
   static var previews: some View {
-    let settingStore = SettingsStore(named: "Preview")
-    let statistics = StatisticsViewModel(with: settingStore)
+    let settingsStore = SettingsStore(named: "Preview")
+    let recordsStore = ScheduleRecordsStore()
+    let statistics = StatisticsViewModel(with: settingsStore, and: recordsStore)
     StatisticsView()
       .environmentObject(statistics)
   }
