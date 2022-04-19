@@ -60,12 +60,11 @@ struct StatisticsView: View {
     
     let circleWidth = CircleRatio * size.width
     
-    let overlay = Circle().stroke(CircleColor, lineWidth: CircleLineWidth).shadow(radius: CircleShadow)
     return ZStack {
       Circle()
-        .fill(.clear)
+        .stroke(CircleColor, lineWidth: CircleLineWidth)
+        .shadow(radius: CircleShadow)
         .frame(width: circleWidth, height: circleWidth)
-        .overlay(overlay)
       
       HStack(alignment: .firstTextBaseline) {
         Text("\(statistics.vacationDaysLeftThisYear)")
