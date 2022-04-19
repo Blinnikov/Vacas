@@ -53,18 +53,24 @@ struct StatisticsView: View {
   
   private func circle(in size: CGSize) -> some View {
     let CircleRatio = 0.7
-    let CircleLineWidth: CGFloat = 15
+    let CircleLineWidth: CGFloat = 20
     let CircleShadow: CGFloat = 10
+    let CircleBackgroundColor = Color(red: 213, green: 241, blue: 221)
     let CircleColor = Color.green
     let CircleFontSize: CGFloat = CircleRatio * 100 + 10
     
     let circleWidth = CircleRatio * size.width
+    let progress: CGFloat = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
     
     return ZStack {
       Circle()
-        .stroke(CircleColor, lineWidth: CircleLineWidth)
+        .stroke(CircleBackgroundColor, lineWidth: CircleLineWidth)
+      
+      Circle()
+        .trim(from: 0, to: progress)
+        .stroke(CircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
         .shadow(radius: CircleShadow)
-        .frame(width: circleWidth, height: circleWidth)
+        .rotationEffect(.degrees(-90))
       
       HStack(alignment: .firstTextBaseline) {
         Text("\(statistics.vacationDaysLeftThisYear)")
@@ -74,6 +80,7 @@ struct StatisticsView: View {
           .foregroundColor(CircleColor)
       }
     }
+    .frame(width: circleWidth, height: circleWidth)
   }
   
   func listItem(title: String, _ amount: Int) -> some View {
