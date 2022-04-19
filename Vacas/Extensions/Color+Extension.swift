@@ -16,6 +16,10 @@ extension Color {
   init(rgbaColor rgba: RGBAColor) {
     self.init(.sRGB, red: rgba.red, green: rgba.green, blue: rgba.blue, opacity: rgba.alpha)
   }
+  
+  init(red: Double, green: Double, blue: Double) {
+    self.init(.sRGB, red: red / 255, green: green / 255, blue: blue / 255, opacity: 1.0)
+  }
 }
 
 extension RGBAColor {
