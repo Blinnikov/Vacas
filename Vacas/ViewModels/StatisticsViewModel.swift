@@ -61,4 +61,10 @@ class StatisticsViewModel: ObservableObject {
   var workingDaysThisYear: Int {
     dateService.workingDaysThisYear
   }
+  
+  var daysOffTaken: Int {
+    recordsStore.records.filter { record in
+      record.type == ScheduleChangeType.timeOff(.personalTime)
+    }.count
+  }
 }

@@ -33,6 +33,8 @@ struct StatisticsView: View {
             listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
             
             listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
+            
+            listItem(title: "Days off taken", statistics.daysOffTaken)
           }
           
           Divider()
