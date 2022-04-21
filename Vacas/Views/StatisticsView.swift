@@ -54,7 +54,7 @@ struct StatisticsView: View {
   }
   
   private func circle(in size: CGSize) -> some View {
-    let CircleRatio = 0.7
+    let CircleRatio = 0.8
     let CircleLineWidth: CGFloat = 20
     let CircleShadow: CGFloat = 10
     let CircleBackgroundColor = Color(red: 213, green: 241, blue: 221)
@@ -73,6 +73,13 @@ struct StatisticsView: View {
         .stroke(CircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
         .shadow(radius: CircleShadow)
         .rotationEffect(.degrees(-90))
+      
+      Circle()
+        .trim(from: 0, to: 0.2)
+        .stroke(Color.pink, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
+        .shadow(radius: CircleShadow)
+        .rotationEffect(.degrees(-90))
+        .padding(32)
       
       HStack(alignment: .firstTextBaseline) {
         Text("\(statistics.vacationDaysLeftThisYear)")
