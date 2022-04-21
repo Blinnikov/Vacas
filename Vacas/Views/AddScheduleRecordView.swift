@@ -34,6 +34,7 @@ struct AddScheduleRecordView: View {
         Spacer()
         
         Button {
+          // TODO: Add validation on empty title before saving
           onSave(record)
         } label: {
           buttonLabel(systemName: "calendar.badge.plus")
@@ -63,6 +64,7 @@ struct AddScheduleRecordView: View {
   var typeSelector: some View {
     Menu {
       Picker(selection: $record.type, label: Image(systemName: "plus")){
+        // TODO: Rewrite using `ForEach`
         Text("Overtime").tag(ScheduleChangeType.overtime)
         Text("Vacation").tag(ScheduleChangeType.timeOff(.vacation))
         Text("Holiday").tag(ScheduleChangeType.timeOff(.holiday))

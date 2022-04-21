@@ -57,36 +57,48 @@ struct StatisticsView: View {
     let CircleRatio = 0.8
     let CircleLineWidth: CGFloat = 20
     let CircleShadow: CGFloat = 10
-    let CircleBackgroundColor = Color(red: 213, green: 241, blue: 221)
-    let CircleColor = Color.green
+    let OuterCircleColor = Color.green
+    let InnerCircleColor = Color.pink
+    let TextColor = Color.green
+    let CircleBackgroundOpacity = 0.23
     let CircleFontSize: CGFloat = CircleRatio * 100 + 10
     
     let circleWidth = CircleRatio * size.width
     let progress: CGFloat = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
     
     return ZStack {
+      // TODO: Extract as a separate view?
+      // TODO: Add animation for circle rotation onAppear
+      // MARK: - Circle start
       Circle()
-        .stroke(CircleBackgroundColor, lineWidth: CircleLineWidth)
+        .stroke(OuterCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
       
       Circle()
         .trim(from: 0, to: progress)
-        .stroke(CircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
+        .stroke(OuterCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
         .shadow(radius: CircleShadow)
         .rotationEffect(.degrees(-90))
+      // MARK: Circle end -
       
-      Circle()
-        .trim(from: 0, to: 0.2)
-        .stroke(Color.pink, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
-        .shadow(radius: CircleShadow)
-        .rotationEffect(.degrees(-90))
-        .padding(32)
+      // TODO: Show only if there're days off taken
+      Group {
+        Circle()
+          .stroke(InnerCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
+        
+        Circle()
+          .trim(from: 0, to: 0.2)
+          .stroke(InnerCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
+          .shadow(radius: CircleShadow)
+          .rotationEffect(.degrees(-90))
+      }
+      .padding(32)
       
       HStack(alignment: .firstTextBaseline) {
         Text("\(statistics.vacationDaysLeftThisYear)")
-          .foregroundColor(CircleColor)
+          .foregroundColor(TextColor)
           .font(.system(size: CircleFontSize))
         Text(" / \(statistics.totalVacationDaysPerYear)")
-          .foregroundColor(CircleColor)
+          .foregroundColor(TextColor)
       }
     }
     .frame(width: circleWidth, height: circleWidth)
