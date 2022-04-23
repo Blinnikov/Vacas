@@ -38,14 +38,6 @@ struct StatisticsView: View {
           }
           
           Divider()
-          
-          VStack {
-            listItem(title: "Width", Int(proxy.size.width))
-            
-            listItem(title: "Height", Int(proxy.size.height))
-            Divider()
-          }
-          .padding(.bottom)
         }
         
         circle(in: proxy.size)
