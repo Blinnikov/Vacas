@@ -16,6 +16,8 @@ class StatisticsViewModel: ObservableObject {
   var settingsCancellable: AnyCancellable? = nil
   var recordsCancellable: AnyCancellable? = nil
   
+  let MaximumDaysOffAllowed = 10
+  
   init(with settingStore: SettingsStore, and recordsStore: ScheduleRecordsStore) {
     self.settingsStore = settingStore
     self.recordsStore = recordsStore

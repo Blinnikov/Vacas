@@ -56,7 +56,11 @@ struct StatisticsView: View {
     let CircleFontSize: CGFloat = CircleRatio * 100 + 10
     
     let circleWidth = CircleRatio * size.width
-    let progress: CGFloat = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
+    let vacationProgress = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
+    
+    // MARK: - Inner circle vars
+    let daysOffCircleShown = statistics.daysOffTaken > 0
+    let daysOffProgress = CGFloat (statistics.daysOffTaken) / CGFloat(statistics.MaximumDaysOffAllowed)
     
     return ZStack {
       // TODO: Extract as a separate view?
@@ -66,7 +70,7 @@ struct StatisticsView: View {
         .stroke(OuterCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
       
       Circle()
-        .trim(from: 0, to: progress)
+        .trim(from: 0, to: vacationProgress)
         .stroke(OuterCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
         .shadow(radius: CircleShadow)
         .rotationEffect(.degrees(-90))
@@ -78,11 +82,12 @@ struct StatisticsView: View {
           .stroke(InnerCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
         
         Circle()
-          .trim(from: 0, to: 0.2)
+          .trim(from: 0, to: daysOffProgress)
           .stroke(InnerCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
           .shadow(radius: CircleShadow)
           .rotationEffect(.degrees(-90))
       }
+      .opacity(daysOffCircleShown ? 1 : 0)
       .padding(32)
       
       HStack(alignment: .firstTextBaseline) {
