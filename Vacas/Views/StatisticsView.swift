@@ -49,16 +49,16 @@ struct StatisticsView: View {
     let CircleRatio = 0.8
     let CircleLineWidth: CGFloat = 20
     let CircleShadow: CGFloat = 10
-    let OuterCircleColor = Color.green
-    let InnerCircleColor = Color.pink
+    let VacationsCircleColor = Color.green
     let TextColor = Color.green
     let CircleBackgroundOpacity = 0.23
     let CircleFontSize: CGFloat = CircleRatio * 100 + 10
     
     let circleWidth = CircleRatio * size.width
-    let vacationProgress = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
+    let vacationsProgress = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
     
     // MARK: - Inner circle vars
+    let DaysOffCircleColor = Color.pink
     let daysOffCircleShown = statistics.daysOffTaken > 0
     let daysOffProgress = CGFloat (statistics.daysOffTaken) / CGFloat(statistics.MaximumDaysOffAllowed)
     
@@ -67,11 +67,11 @@ struct StatisticsView: View {
       // TODO: Add animation for circle rotation onAppear
       // MARK: - Circle start
       Circle()
-        .stroke(OuterCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
+        .stroke(VacationsCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
       
       Circle()
-        .trim(from: 0, to: vacationProgress)
-        .stroke(OuterCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
+        .trim(from: 0, to: vacationsProgress)
+        .stroke(VacationsCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
         .shadow(radius: CircleShadow)
         .rotationEffect(.degrees(-90))
       // MARK: Circle end -
@@ -79,11 +79,11 @@ struct StatisticsView: View {
       // TODO: Show only if there're days off taken
       Group {
         Circle()
-          .stroke(InnerCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
+          .stroke(DaysOffCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
         
         Circle()
           .trim(from: 0, to: daysOffProgress)
-          .stroke(InnerCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
+          .stroke(DaysOffCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
           .shadow(radius: CircleShadow)
           .rotationEffect(.degrees(-90))
       }
