@@ -47,14 +47,11 @@ struct StatisticsView: View {
   
   private func circle(in size: CGSize) -> some View {
     let CircleRatio = 0.8
-    let CircleLineWidth: CGFloat = 20
-    let CircleShadow: CGFloat = 10
-    let VacationsCircleColor = Color.green
-    let TextColor = Color.green
-    let CircleBackgroundOpacity = 0.23
     let CircleFontSize: CGFloat = CircleRatio * 100 + 10
+    let frameWidth = CircleRatio * size.width
     
-    let circleWidth = CircleRatio * size.width
+    // MARK: - Outer circle vars
+    let VacationsColor = Color.green
     let vacationsProgress = CGFloat(statistics.vacationDaysLeftThisYear) / CGFloat(statistics.totalVacationDaysPerYear)
     
     // MARK: - Inner circle vars
@@ -65,40 +62,21 @@ struct StatisticsView: View {
     return ZStack {
       // TODO: Extract as a separate view?
       // TODO: Add animation for circle rotation onAppear
-      // MARK: - Circle start
-      Circle()
-        .stroke(VacationsCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
+      TimeOffProgressCircle(color: VacationsColor, progress: vacationsProgress)
       
-      Circle()
-        .trim(from: 0, to: vacationsProgress)
-        .stroke(VacationsCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
-        .shadow(radius: CircleShadow)
-        .rotationEffect(.degrees(-90))
-      // MARK: Circle end -
-      
-      // TODO: Show only if there're days off taken
-      Group {
-        Circle()
-          .stroke(DaysOffCircleColor.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
-        
-        Circle()
-          .trim(from: 0, to: daysOffProgress)
-          .stroke(DaysOffCircleColor, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
-          .shadow(radius: CircleShadow)
-          .rotationEffect(.degrees(-90))
-      }
-      .opacity(daysOffCircleShown ? 1 : 0)
-      .padding(32)
+      TimeOffProgressCircle(color: DaysOffCircleColor, progress: daysOffProgress)
+        .opacity(daysOffCircleShown ? 1 : 0)
+        .padding(32)
       
       HStack(alignment: .firstTextBaseline) {
         Text("\(statistics.vacationDaysLeftThisYear)")
-          .foregroundColor(TextColor)
+          .foregroundColor(VacationsColor)
           .font(.system(size: CircleFontSize))
         Text(" / \(statistics.totalVacationDaysPerYear)")
-          .foregroundColor(TextColor)
+          .foregroundColor(VacationsColor)
       }
     }
-    .frame(width: circleWidth, height: circleWidth)
+    .frame(width: frameWidth, height: frameWidth)
   }
   
   func listItem(title: String, _ amount: Int) -> some View {
@@ -109,7 +87,28 @@ struct StatisticsView: View {
     }
     .padding(.horizontal)
   }
+}
+
+struct TimeOffProgressCircle: View {
+  let color: Color
+  let progress: CGFloat
+  let CircleLineWidth: CGFloat = 20
+  let CircleBackgroundOpacity = 0.23
+  let CircleShadow: CGFloat = 10
+  
+  var body: some View {
+    Group {
+      Circle()
+        .stroke(color.opacity(CircleBackgroundOpacity), lineWidth: CircleLineWidth)
+      
+      Circle()
+        .trim(from: 0, to: progress)
+        .stroke(color, style: StrokeStyle(lineWidth: CircleLineWidth, lineCap: .round))
+        .shadow(radius: CircleShadow)
+        .rotationEffect(.degrees(-90))
+    }
   }
+}
 
 struct DeveloperInfoView_Previews: PreviewProvider {
   static var previews: some View {
