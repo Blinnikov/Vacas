@@ -13,39 +13,13 @@ struct StatisticsView: View {
   var body: some View {
     GeometryReader { proxy in
       ZStack {
-        VStack {
-          Spacer()
-          HStack {
-            Spacer()
-            // TODO: Get rid of this title
-            // Make some cool representative start screen
-            Text("Statistics")
-              .font(.title)
-              .padding(.horizontal)
-              .padding(.bottom, 2)
-          }
-          
-          Group {
-            listItem(title: "Working days this year", statistics.workingDaysThisYear)
-            
-            listItem(title: "Vacation days gained", statistics.vacationDaysGained)
-            
-            listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
-            
-            listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
-            
-            listItem(title: "Days off taken", statistics.daysOffTaken)
-          }
-          
-          Divider()
-        }
-        
-        circle(in: proxy.size)
+        statisticsLayer()
+        circlesLayer(in: proxy.size)
       }
     }
   }
   
-  private func circle(in size: CGSize) -> some View {
+  private func circlesLayer(in size: CGSize) -> some View {
     let CircleRatio = 0.8
     let CircleFontSize: CGFloat = CircleRatio * 100 + 10
     let frameWidth = CircleRatio * size.width
@@ -60,7 +34,6 @@ struct StatisticsView: View {
     let daysOffProgress = CGFloat (statistics.daysOffTaken) / CGFloat(statistics.MaximumDaysOffAllowed)
     
     return ZStack {
-      // TODO: Extract as a separate view?
       // TODO: Add animation for circle rotation onAppear
       TimeOffProgressCircle(color: VacationsColor, progress: vacationsProgress)
       
@@ -77,6 +50,35 @@ struct StatisticsView: View {
       }
     }
     .frame(width: frameWidth, height: frameWidth)
+  }
+  
+  private func statisticsLayer() -> some View {
+    VStack {
+      Spacer()
+      HStack {
+        Spacer()
+        // TODO: Get rid of this title
+        // Make some cool representative start screen
+        Text("Statistics")
+          .font(.title)
+          .padding(.horizontal)
+          .padding(.bottom, 2)
+      }
+      
+      Group {
+        listItem(title: "Working days this year", statistics.workingDaysThisYear)
+        
+        listItem(title: "Vacation days gained", statistics.vacationDaysGained)
+        
+        listItem(title: "Vacation days spent this year", statistics.vacationDaysSpentThisYear)
+        
+        listItem(title: "Vacation days left this year", statistics.vacationDaysLeftThisYear)
+        
+        listItem(title: "Days off taken", statistics.daysOffTaken)
+      }
+      
+      Divider()
+    }
   }
   
   func listItem(title: String, _ amount: Int) -> some View {
