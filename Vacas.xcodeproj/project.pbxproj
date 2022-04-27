@@ -25,6 +25,7 @@
 		7874037F277B79B800576267 /* DayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7874037E277B79B800576267 /* DayItem.swift */; };
 		78803CA127BC4BE500724746 /* Appearance+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78803CA027BC4BE500724746 /* Appearance+Extension.swift */; };
 		78A2456027F2F33F00A7AC72 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2455F27F2F33F00A7AC72 /* CalendarViewModel.swift */; };
+		78A4E25D28199E3400ED7779 /* TimeOffProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A4E25C28199E3400ED7779 /* TimeOffProgressCircle.swift */; };
 		78BC9A3A2802156500F5A121 /* ScheduleRecord.TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78BC9A392802156500F5A121 /* ScheduleRecord.TestData.swift */; };
 		78C4D062277D0C9500D3DEF1 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */; };
 		78C5F2B32808A44300E763B0 /* ScheduleRecordsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C5F2B22808A44300E763B0 /* ScheduleRecordsStore.swift */; };
@@ -66,6 +67,7 @@
 		7874037E277B79B800576267 /* DayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayItem.swift; sourceTree = "<group>"; };
 		78803CA027BC4BE500724746 /* Appearance+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appearance+Extension.swift"; sourceTree = "<group>"; };
 		78A2455F27F2F33F00A7AC72 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		78A4E25C28199E3400ED7779 /* TimeOffProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOffProgressCircle.swift; sourceTree = "<group>"; };
 		78BC9A392802156500F5A121 /* ScheduleRecord.TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecord.TestData.swift; sourceTree = "<group>"; };
 		78C4D061277D0C9500D3DEF1 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		78C5F2B22808A44300E763B0 /* ScheduleRecordsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRecordsStore.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				78F84F7727DF506000657C8E /* StatisticsView.swift */,
 				785ABCAC27F8E8E3007C3D86 /* Markers.swift */,
 				7873510F280457CA0080656B /* AddScheduleRecordView.swift */,
+				78A4E25C28199E3400ED7779 /* TimeOffProgressCircle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				78CDD84E2773D0430037D098 /* VacasApp.swift in Sources */,
 				780D82B827B97724001F2C7F /* Settings.swift in Sources */,
 				78740375277A205800576267 /* CalendarView.swift in Sources */,
+				78A4E25D28199E3400ED7779 /* TimeOffProgressCircle.swift in Sources */,
 				785ABCAD27F8E8E3007C3D86 /* Markers.swift in Sources */,
 				7874037F277B79B800576267 /* DayItem.swift in Sources */,
 				7874037D277B770600576267 /* Date+Extension.swift in Sources */,
