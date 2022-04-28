@@ -57,8 +57,7 @@ struct StatisticsView: View {
       Spacer()
       HStack {
         Spacer()
-        // TODO: Get rid of this title
-        // Make some cool representative start screen
+        // TODO: Make some cool representative start screen
         Text("Statistics")
           .font(.title)
           .padding(.horizontal)

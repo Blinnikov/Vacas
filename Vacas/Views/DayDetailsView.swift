@@ -31,7 +31,6 @@ struct DayDetailsView: View {
               addRecordFormShown = true
             }
           } label: {
-//            Image(systemName: "plus.square.on.square")          
             Image(systemName: "plus.circle")
           }
         }
