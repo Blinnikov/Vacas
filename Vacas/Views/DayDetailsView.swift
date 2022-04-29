@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct DayDetailsView: View {
-  // TODO: Rename to something generic like `events`?
-  // Introduce new view type that needs to be mapped into
   let day: Date
   var records: [ScheduleRecord]
   let canAdd = true
@@ -40,7 +38,6 @@ struct DayDetailsView: View {
       if canAdd && addRecordFormShown {
         // TODO: Pass selected day as a param
         AddScheduleRecordView(day: day) { record in
-          print(record)
           store.records.append(record)
           addRecordFormShown = false
         } onDismiss: {
