@@ -48,12 +48,36 @@ struct DayDetailsView: View {
       if records.isEmpty {
         Text("No records for the day")
       } else {
-        ForEach(records) { record in
-          // TODO: Add swipe gesture to delete record 
-          ScheduleRecordView(record: record)
-        }
+//        ForEachImplementation(records: records)
+        ListImplementation(records: records)
       }
     }
+  }
+  
+  func ForEachImplementation(records: [ScheduleRecord]) -> some View {
+    ForEach(records) { record in
+      // TODO: Add swipe gesture to delete record
+      ScheduleRecordView(record: record)
+    }
+  }
+  
+  func ListImplementation(records: [ScheduleRecord]) -> some View {
+    List {
+      ForEach(records) { record in
+        ScheduleRecordView(record: record)
+          .listRowSeparator(.hidden)
+          .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
+      }
+      .onDelete { indexSet in
+//        records.remove(atOffsets: indexSet)
+      }
+    }
+//    .toolbar {
+//      EditButton()
+//    }
+    .listStyle(.plain)
+    .scaledToFit() // NOTE: To make `List` within `ScrollView` work
+//    .frame(height: CGFloat(records.count * 100))
   }
 }
 
