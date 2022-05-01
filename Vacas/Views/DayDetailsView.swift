@@ -57,7 +57,9 @@ struct DayDetailsView: View {
   func ForEachImplementation(records: [ScheduleRecord]) -> some View {
     ForEach(records) { record in
       // TODO: Add swipe gesture to delete record
-      ScheduleRecordView(record: record)
+      ScheduleRecordView(record: record) { record in
+        print(record)
+      }
     }
   }
   
@@ -68,16 +70,20 @@ struct DayDetailsView: View {
           .listRowSeparator(.hidden)
           .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
       }
-      .onDelete { indexSet in
-//        records.remove(atOffsets: indexSet)
+      .swipeActions(edge: .trailing) {
+        Button(role: .destructive) {
+//          store.delete(message)
+        } label: {
+          Label("Delete", systemImage: "trash")
+            .tint(.red)
+            .foregroundColor(.red)
+        }
       }
     }
-//    .toolbar {
-//      EditButton()
-//    }
     .listStyle(.plain)
-    .scaledToFit() // NOTE: To make `List` within `ScrollView` work
-//    .frame(height: CGFloat(records.count * 100))
+    // To make `List` within `ScrollView` work
+    // https://stackoverflow.com/questions/58959475/list-hides-when-adding-in-scrollview-swiftui
+    .scaledToFit()
   }
 }
 

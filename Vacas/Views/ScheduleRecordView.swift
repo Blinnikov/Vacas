@@ -9,11 +9,38 @@ import SwiftUI
 
 struct ScheduleRecordView: View {
   let record: ScheduleRecord
+  let onDelete: ((_ record: ScheduleRecord) -> Void)?
+  
+  init(record: ScheduleRecord, onDelete: ((ScheduleRecord) -> Void)?) {
+    self.record = record
+    self.onDelete = onDelete
+  }
+  
+  init(record: ScheduleRecord) {
+    self.record = record
+    self.onDelete = nil
+  }
   
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      // TODO: Do I need it?
-      Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
+      HStack {
+        // TODO: Do I need it?
+        Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
+        Spacer()
+        
+        if let onDelete = onDelete {
+          Button {
+            withAnimation {
+              onDelete(record)
+            }
+          } label: {
+            
+            Image(systemName: "trash")
+              .foregroundColor(.red)
+              .font(.callout)
+          }
+        }
+      }
       
       Text(record.title)
         .font(.title2.bold())
@@ -32,6 +59,6 @@ struct RecordView_Previews: PreviewProvider {
   static var previews: some View {
     let store = ScheduleRecordsStore()
     let record = store.records.first!
-    ScheduleRecordView(record: record)
+    ScheduleRecordView(record: record, onDelete: { _ in })
   }
 }
