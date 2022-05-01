@@ -67,8 +67,12 @@ struct DayDetailsView: View {
     List {
       ForEach(records) { record in
         ScheduleRecordView(record: record)
+        // To remove row separators
+        // https://stackoverflow.com/questions/56553672/how-to-remove-the-line-separators-from-a-list-in-swiftui-without-using-foreach
           .listRowSeparator(.hidden)
-          .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
+        // To remove row paddings added by List
+        // https://stackoverflow.com/questions/56614080/how-to-remove-the-left-and-right-padding-of-a-list-in-swiftui
+          .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
       }
       .swipeActions(edge: .trailing) {
         Button(role: .destructive) {
