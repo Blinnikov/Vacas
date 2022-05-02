@@ -32,7 +32,7 @@ struct CalendarView: View {
           }
           
           if visibleDate.monthsOffset(from: selection) == 0 {
-            let records = scheduleRecords(for: selection)
+            let records = store.records(for: selection)
             DayDetailsView(day: selection, records: records)
               .padding(.horizontal)
           }
@@ -56,7 +56,7 @@ struct CalendarView: View {
         
         Spacer()
         
-        if let records = scheduleRecords(for: date), !records.isEmpty {
+        if let records = store.records(for: date), !records.isEmpty {
           Markers(records: records)
         }
       }
@@ -85,12 +85,6 @@ struct CalendarView: View {
       return 0
     }
     return date.inSameDayAs(today) && !date.inSameDayAs(selection) ? 1 : 0
-  }
-  
-  private func scheduleRecords(for day: Date) -> [ScheduleRecord] {
-    return store.records.filter { record in
-      record.date.inSameDayAs(day)
-    }
   }
   
   var buttons: some View {

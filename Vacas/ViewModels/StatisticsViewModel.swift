@@ -39,9 +39,7 @@ class StatisticsViewModel: ObservableObject {
   }
   
   var vacationDaysSpentThisYear: Int {
-    recordsStore.records.filter { record in
-      record.type == ScheduleChangeType.timeOff(.vacation)
-    }.count
+    recordsStore.records(of: ScheduleChangeType.timeOff(.vacation)).count
   }
   
   var vacationDaysLeftThisYear: Int {
@@ -60,8 +58,6 @@ class StatisticsViewModel: ObservableObject {
   }
   
   var daysOffTaken: Int {
-    recordsStore.records.filter { record in
-      record.type == ScheduleChangeType.timeOff(.personalTime)
-    }.count
+    recordsStore.records(of: ScheduleChangeType.timeOff(.personalTime)).count
   }
 }

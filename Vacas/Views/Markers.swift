@@ -76,8 +76,7 @@ struct Markers_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
     let store = ScheduleRecordsStore()
-    let records = Array(store.records.suffix(7))
-    Markers(records: records)
+    Markers(records: store.last(7))
       .environmentObject(viewModel)
   }
 }

@@ -38,7 +38,7 @@ struct DayDetailsView: View {
       if canAdd && addRecordFormShown {
         // TODO: Pass selected day as a param
         AddScheduleRecordView(day: day) { record in
-          store.records.append(record)
+          store.add(record)
           addRecordFormShown = false
         } onDismiss: {
           addRecordFormShown = false
@@ -95,8 +95,7 @@ struct DayDetailsView_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
     let store = ScheduleRecordsStore()
-    let records = Array(store.records.prefix(3))
-    DayDetailsView(day: Date(), records: records)
+    DayDetailsView(day: Date(), records: store.first(3))
       .environmentObject(viewModel)
   }
 }

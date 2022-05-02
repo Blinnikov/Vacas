@@ -58,7 +58,7 @@ struct ScheduleRecordView: View {
 struct RecordView_Previews: PreviewProvider {
   static var previews: some View {
     let store = ScheduleRecordsStore()
-    let record = store.records.first!
+    let record = store.first()!
     ScheduleRecordView(record: record, onDelete: { _ in })
   }
 }
