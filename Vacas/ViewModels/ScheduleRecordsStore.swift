@@ -41,4 +41,13 @@ class ScheduleRecordsStore: ObservableObject {
   func add(_ record: ScheduleRecord) {
     self.records.append(record)
   }
+  
+  @discardableResult
+  func remove(_ record: ScheduleRecord) -> ScheduleRecord? {
+    if let index = self.records.firstIndex(where: { r in r.id == record.id }) {
+      return self.records.remove(at: index)
+    }
+    
+    return nil
+  }
 }
