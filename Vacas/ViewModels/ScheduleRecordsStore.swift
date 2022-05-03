@@ -44,6 +44,7 @@ class ScheduleRecordsStore: ObservableObject {
   
   @discardableResult
   func remove(_ record: ScheduleRecord) -> ScheduleRecord? {
+    // TODO: It looks like removal works wrong
     if let index = self.records.firstIndex(where: { r in r.id == record.id }) {
       return self.records.remove(at: index)
     }

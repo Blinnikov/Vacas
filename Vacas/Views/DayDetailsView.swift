@@ -54,11 +54,23 @@ struct DayDetailsView: View {
     }
   }
   
+  @State private var isShowingAlert = false
+  
   func ForEachImplementation(records: [ScheduleRecord]) -> some View {
     ForEach(records) { record in
       // TODO: Add swipe gesture to delete record
       ScheduleRecordView(record: record) { record in
-        print(record)
+        // TODO: UI is not updated
+        // TODO: Add warning alert before deletion
+        isShowingAlert = true
+      }
+      .alert("Do you really want to delete?", isPresented: $isShowingAlert) {
+        Button("Delete", role: .destructive) {
+          withAnimation {
+            store.remove(record)
+            print("Removed: \(record)")
+          }
+        }
       }
     }
   }
@@ -76,7 +88,7 @@ struct DayDetailsView: View {
       }
       .swipeActions(edge: .trailing) {
         Button(role: .destructive) {
-//          store.delete(message)
+//          store.remove(record)
         } label: {
           Label("Delete", systemImage: "trash")
             .tint(.red)
