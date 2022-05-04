@@ -54,7 +54,9 @@ struct DayDetailsView: View {
     }
   }
   
-  @State private var isShowingAlert = false
+  @State private var alertShown = false
+  @State private var confirmationDialogShown = false
+  private let warningTitle = "Are you sure?"
   
   func ForEachImplementation(records: [ScheduleRecord]) -> some View {
     ForEach(records) { record in
@@ -62,15 +64,24 @@ struct DayDetailsView: View {
       ScheduleRecordView(record: record) { record in
         // TODO: UI is not updated
         // TODO: Add warning alert before deletion
-        isShowingAlert = true
+//        alertShown = true
+        confirmationDialogShown = true
       }
-      .alert("Do you really want to delete?", isPresented: $isShowingAlert) {
-        Button("Delete", role: .destructive) {
-          withAnimation {
-            store.remove(record)
-            print("Removed: \(record)")
-          }
-        }
+      .alert(warningTitle, isPresented: $alertShown) {
+        deleteButton(record)
+      }
+      .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
+        deleteButton(record)
+      }
+    }
+  }
+  
+  func deleteButton(_ record: ScheduleRecord) -> some View {
+    Button("Delete", role: .destructive) {
+      withAnimation {
+        print("Trying to delete: \(record)")
+        store.remove(record)
+        print("Removed: \(record)")
       }
     }
   }
@@ -85,15 +96,23 @@ struct DayDetailsView: View {
         // To remove row paddings added by List
         // https://stackoverflow.com/questions/56614080/how-to-remove-the-left-and-right-padding-of-a-list-in-swiftui
           .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
-      }
-      .swipeActions(edge: .trailing) {
-        Button(role: .destructive) {
-//          store.remove(record)
-        } label: {
-          Label("Delete", systemImage: "trash")
-            .tint(.red)
-            .foregroundColor(.red)
-        }
+          .swipeActions(edge: .trailing) {
+            Button(role: .destructive) {
+              print("Swiping: \(record)")
+              alertShown = true
+//              confirmationDialogShown = true
+            } label: {
+              Label("Delete", systemImage: "trash")
+                .tint(.red)
+                .foregroundColor(.red)
+            }
+          }
+          .alert(warningTitle, isPresented: $alertShown) {
+            deleteButton(record)
+          }
+          .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
+            deleteButton(record)
+          }
       }
     }
     .listStyle(.plain)
