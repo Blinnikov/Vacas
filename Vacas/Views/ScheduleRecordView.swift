@@ -30,11 +30,8 @@ struct ScheduleRecordView: View {
         
         if let onDelete = onDelete {
           Button {
-            withAnimation {
-              onDelete(record)
-            }
+            onDelete(record)
           } label: {
-            
             Image(systemName: "trash")
               .foregroundColor(.red)
               .font(.callout)

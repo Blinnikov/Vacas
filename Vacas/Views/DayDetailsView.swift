@@ -56,32 +56,21 @@ struct DayDetailsView: View {
   
   @State private var alertShown = false
   @State private var confirmationDialogShown = false
+  @State private var itemToDelete: ScheduleRecord? = nil // Because closure in ForEach works strange
   private let warningTitle = "Are you sure?"
   
   func ForEachImplementation(records: [ScheduleRecord]) -> some View {
     ForEach(records) { record in
-      // TODO: Add swipe gesture to delete record
-      ScheduleRecordView(record: record) { record in
-        // TODO: UI is not updated
-        // TODO: Add warning alert before deletion
+      ScheduleRecordView(record: record) { r in
 //        alertShown = true
         confirmationDialogShown = true
+        itemToDelete = r
       }
       .alert(warningTitle, isPresented: $alertShown) {
-        deleteButton(record)
+        alertButtons()
       }
       .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
-        deleteButton(record)
-      }
-    }
-  }
-  
-  func deleteButton(_ record: ScheduleRecord) -> some View {
-    Button("Delete", role: .destructive) {
-      withAnimation {
-        print("Trying to delete: \(record)")
-        store.remove(record)
-        print("Removed: \(record)")
+        alertButtons()
       }
     }
   }
@@ -98,9 +87,9 @@ struct DayDetailsView: View {
           .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
           .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
-              print("Swiping: \(record)")
-              alertShown = true
-//              confirmationDialogShown = true
+//              alertShown = true
+              confirmationDialogShown = true
+              itemToDelete = record
             } label: {
               Label("Delete", systemImage: "trash")
                 .tint(.red)
@@ -108,10 +97,10 @@ struct DayDetailsView: View {
             }
           }
           .alert(warningTitle, isPresented: $alertShown) {
-            deleteButton(record)
+            alertButtons()
           }
           .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
-            deleteButton(record)
+            alertButtons()
           }
       }
     }
@@ -119,6 +108,23 @@ struct DayDetailsView: View {
     // To make `List` within `ScrollView` work
     // https://stackoverflow.com/questions/58959475/list-hides-when-adding-in-scrollview-swiftui
     .scaledToFit()
+  }
+  
+  @ViewBuilder
+  func alertButtons() -> some View {
+    Button("Delete", role: .destructive) {
+      withAnimation {
+        if let itemToDelete = itemToDelete {
+          // TODO: Make removal async
+          store.remove(itemToDelete)
+        }
+        itemToDelete = nil
+      }
+    }
+    
+    Button("Cancel", role: .cancel) {
+      itemToDelete = nil
+    }
   }
 }
 
