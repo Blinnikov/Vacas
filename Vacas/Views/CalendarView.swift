@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
   @State private var selection = Date()
-  @State private var visibleDate = Date().theSameDay(in: -1)
+  @State private var visibleDate = Date()
   @State private var developerInfoShown = false
   
   @EnvironmentObject var viewModel: CalendarViewModel
