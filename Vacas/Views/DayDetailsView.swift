@@ -38,8 +38,10 @@ struct DayDetailsView: View {
       if canAdd && addRecordFormShown {
         // TODO: Pass selected day as a param
         AddScheduleRecordView(day: day) { record in
-          store.add(record)
-          addRecordFormShown = false
+          Task {
+            await store.add(record)
+            addRecordFormShown = false
+          }
         } onDismiss: {
           addRecordFormShown = false
         }
@@ -113,13 +115,13 @@ struct DayDetailsView: View {
   @ViewBuilder
   func alertButtons() -> some View {
     Button("Delete", role: .destructive) {
-      withAnimation {
-        if let itemToDelete = itemToDelete {
-          // TODO: Make removal async
-          store.remove(itemToDelete)
+      if let itemToDelete = itemToDelete {
+        // TODO: `withAnimation` doesn't work alongside with `Task`, need to workaround this
+        Task {
+          await store.remove(itemToDelete)
         }
-        itemToDelete = nil
       }
+      itemToDelete = nil
     }
     
     Button("Cancel", role: .cancel) {

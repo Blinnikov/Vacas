@@ -38,12 +38,12 @@ class ScheduleRecordsStore: ObservableObject {
     }
   }
   
-  func add(_ record: ScheduleRecord) {
+  func add(_ record: ScheduleRecord) async {
     self.records.append(record)
   }
   
   @discardableResult
-  func remove(_ record: ScheduleRecord) -> ScheduleRecord? {
+  func remove(_ record: ScheduleRecord) async -> ScheduleRecord? {
     // TODO: It looks like removal works wrong
     if let index = self.records.firstIndex(where: { r in r.id == record.id }) {
       return self.records.remove(at: index)
