@@ -12,8 +12,17 @@ struct DayDetailsView: View {
   var records: [ScheduleRecord]
   let canAdd = true
   
+  @State private var shownRecords = Set<UUID>()
   @State private var addRecordFormShown = false
   @EnvironmentObject private var store: ScheduleRecordsStore
+  
+  private func isRecordHidden(_ record: ScheduleRecord) -> Bool {
+    !shownRecords.contains(record.id)
+  }
+  
+  private func hideRecord(_ record: ScheduleRecord) {
+    shownRecords.remove(record.id)
+  }
   
   var body: some View {
     VStack(spacing: 15) {
@@ -54,6 +63,11 @@ struct DayDetailsView: View {
         ListImplementation(records: records)
       }
     }
+    .onAppear {
+      for record in records {
+        shownRecords.insert(record.id)
+      }
+    }
   }
   
   @State private var alertShown = false
@@ -63,16 +77,21 @@ struct DayDetailsView: View {
   
   func ForEachImplementation(records: [ScheduleRecord]) -> some View {
     ForEach(records) { record in
-      ScheduleRecordView(record: record) { r in
-//        alertShown = true
-        confirmationDialogShown = true
-        itemToDelete = r
+      if isRecordHidden(record) {
+        Color.clear
       }
-      .alert(warningTitle, isPresented: $alertShown) {
-        alertButtons()
-      }
-      .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
-        alertButtons()
+      else {
+        ScheduleRecordView(record: record) { r in
+          alertShown = true
+  //        confirmationDialogShown = true
+          itemToDelete = r
+        }
+        .alert(warningTitle, isPresented: $alertShown) {
+          alertButtons()
+        }
+        .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
+          alertButtons()
+        }
       }
     }
   }
@@ -80,30 +99,34 @@ struct DayDetailsView: View {
   func ListImplementation(records: [ScheduleRecord]) -> some View {
     List {
       ForEach(records) { record in
-        ScheduleRecordView(record: record)
-        // To remove row separators
-        // https://stackoverflow.com/questions/56553672/how-to-remove-the-line-separators-from-a-list-in-swiftui-without-using-foreach
-          .listRowSeparator(.hidden)
-        // To remove row paddings added by List
-        // https://stackoverflow.com/questions/56614080/how-to-remove-the-left-and-right-padding-of-a-list-in-swiftui
-          .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
-          .swipeActions(edge: .trailing) {
-            Button(role: .destructive) {
-//              alertShown = true
-              confirmationDialogShown = true
-              itemToDelete = record
-            } label: {
-              Label("Delete", systemImage: "trash")
-                .tint(.red)
-                .foregroundColor(.red)
+        if isRecordHidden(record) {
+          Color.clear
+        } else {
+          ScheduleRecordView(record: record)
+          // To remove row separators
+          // https://stackoverflow.com/questions/56553672/how-to-remove-the-line-separators-from-a-list-in-swiftui-without-using-foreach
+            .listRowSeparator(.hidden)
+          // To remove row paddings added by List
+          // https://stackoverflow.com/questions/56614080/how-to-remove-the-left-and-right-padding-of-a-list-in-swiftui
+            .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+            .swipeActions(edge: .trailing) {
+              Button(role: .destructive) {
+                //              alertShown = true
+                confirmationDialogShown = true
+                itemToDelete = record
+              } label: {
+                Label("Delete", systemImage: "trash")
+                  .tint(.red)
+                  .foregroundColor(.red)
+              }
             }
-          }
-          .alert(warningTitle, isPresented: $alertShown) {
-            alertButtons()
-          }
-          .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
-            alertButtons()
-          }
+            .alert(warningTitle, isPresented: $alertShown) {
+              alertButtons()
+            }
+            .confirmationDialog(warningTitle, isPresented: $confirmationDialogShown) {
+              alertButtons()
+            }
+        }
       }
     }
     .listStyle(.plain)
@@ -117,8 +140,15 @@ struct DayDetailsView: View {
     Button("Delete", role: .destructive) {
       if let itemToDelete = itemToDelete {
         // TODO: `withAnimation` doesn't work alongside with `Task`, need to workaround this
-        Task {
-          await store.remove(itemToDelete)
+        withAnimation {
+          hideRecord(itemToDelete)
+          Task {
+            // Optimistic removal
+            let item = await store.removeAsync(itemToDelete)
+            if item != nil {
+              print("Removed: \(item!)")
+            }
+          }
         }
       }
       itemToDelete = nil
