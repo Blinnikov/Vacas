@@ -8,7 +8,7 @@
 import Foundation
 
 class ScheduleRecordsStore: ObservableObject {
-  @Published var records: [ScheduleRecord] = ScheduleRecord.testData
+  @Published private var records: [ScheduleRecord] = ScheduleRecord.testData
   
   func first() -> ScheduleRecord? {
     records.first
