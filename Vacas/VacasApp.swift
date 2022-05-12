@@ -16,7 +16,7 @@ struct VacasApp: App {
   
   init() {
     let settingsStore = SettingsStore(named: "Default")
-    let recordsStore = ScheduleRecordsStore()
+    let recordsStore = ScheduleRecordsStore(named: "Default")
     
     self._settingsStore = StateObject(wrappedValue: settingsStore)
     self._scheduleRecordsStore = StateObject(wrappedValue: recordsStore)

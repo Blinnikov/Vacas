@@ -45,7 +45,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
     let settingsStore = SettingsStore(named: "Preview")
-    let recordsStore = ScheduleRecordsStore()
+    let recordsStore = ScheduleRecordsStore(named: "Preview")
     let statistics = StatisticsViewModel(with: settingsStore, and: recordsStore)
     let calendar = CalendarViewModel(with: settingsStore)
     

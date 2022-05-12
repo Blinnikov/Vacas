@@ -163,7 +163,7 @@ struct DayDetailsView: View {
 struct DayDetailsView_Previews: PreviewProvider {
   static var previews: some View {
     let viewModel = CalendarViewModel(with: SettingsStore(named: "Preview"))
-    let store = ScheduleRecordsStore()
+    let store = ScheduleRecordsStore(named: "Preview")
     DayDetailsView(day: Date(), records: store.first(3))
       .environmentObject(viewModel)
   }
