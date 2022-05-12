@@ -8,7 +8,41 @@
 import Foundation
 
 class ScheduleRecordsStore: ObservableObject {
-  @Published private var records: [ScheduleRecord] = ScheduleRecord.testData
+  let name: String
+  
+  @Published private var records = [ScheduleRecord]() {
+    didSet {
+      storeInUserDefaults()
+    }
+  }
+  
+  private var userDefaultsKey: String {
+    "ScheduleRecordsStore:" + name
+  }
+  
+  private func storeInUserDefaults() {
+    UserDefaults.standard.set(try? JSONEncoder().encode(records), forKey: userDefaultsKey)
+    print("Saved records in UserDefaults")
+  }
+  
+  private func restoreFromUserDefaults() {
+    if let jsonData = UserDefaults.standard.data(forKey: userDefaultsKey),
+       let decodedRecords = try? JSONDecoder().decode([ScheduleRecord].self, from: jsonData) {
+      records = decodedRecords
+    }
+  }
+  
+  init(named name: String) {
+    self.name = name
+    restoreFromUserDefaults()
+    
+    if records.isEmpty {
+      print("using built-in records")
+      records = ScheduleRecord.testData
+    } else {
+      print("successfully loaded records from UserDefaults: \(records)")
+    }
+  }
   
   func first() -> ScheduleRecord? {
     records.first
