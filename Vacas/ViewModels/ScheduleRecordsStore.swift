@@ -78,16 +78,7 @@ class ScheduleRecordsStore: ObservableObject {
   
   @MainActor
   @discardableResult
-  func removeAsync(_ record: ScheduleRecord) async -> ScheduleRecord? {
-    if let index = self.records.firstIndex(where: { r in r.id == record.id }) {
-      return self.records.remove(at: index)
-    }
-    
-    return nil
-  }
-  
-  @discardableResult
-  func remove(_ record: ScheduleRecord) -> ScheduleRecord? {
+  func remove(_ record: ScheduleRecord) async -> ScheduleRecord? {
     if let index = self.records.firstIndex(where: { r in r.id == record.id }) {
       return self.records.remove(at: index)
     }
