@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddScheduleRecordView: View {
   @State private var record: ScheduleRecord
+  @State private var isValid: Bool = true
   
   private let onSave: (_ record: ScheduleRecord) -> Void
   private let onDismiss: () -> Void
@@ -27,17 +28,26 @@ struct AddScheduleRecordView: View {
         typeSelector
       }
       
-      TextField("Enter a title", text: $record.title)
+      let placeholderText = "Enter a title"
+      TextField(placeholderText, text: $record.title)
         .font(.title2.bold())
+        .onChange(of: record.title) { newValue in checkValidation() }
+        .placeholder(when: record.title.isEmpty) {
+          Text(placeholderText)
+            .font(.title2.bold())
+            .foregroundColor(isValid ? .clear : .red)
+        }
       
       HStack {
         Spacer()
         
         Button {
-          // TODO: Add validation on empty title before saving
-          onSave(record)
+          if checkValidation() {
+            onSave(record)
+          }
         } label: {
           buttonLabel(systemName: "calendar.badge.plus")
+            .disabled(isValid == false)
         }
         .padding(.trailing, 4)
         
@@ -93,6 +103,12 @@ struct AddScheduleRecordView: View {
       Image(systemName: systemName)
         .foregroundColor(discard ? .red : .accentColor)
     }
+  }
+  
+  @discardableResult
+  private func checkValidation() -> Bool {
+    isValid = !record.title.isEmpty
+    return isValid
   }
   
   private struct DrawingConstants {
