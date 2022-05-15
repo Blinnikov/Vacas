@@ -48,6 +48,7 @@ struct DayDetailsView: View {
         // TODO: Pass selected day as a param
         AddScheduleRecordView(day: day) { record in
           Task {
+            // TODO: UI is not updated
             await store.add(record)
             addRecordFormShown = false
           }
@@ -144,7 +145,7 @@ struct DayDetailsView: View {
           hideRecord(itemToDelete)
           Task {
             // Optimistic removal
-            let item = await store.removeAsync(itemToDelete)
+            let item = await store.remove(itemToDelete)
             if item != nil {
               print("Removed: \(item!)")
             }
