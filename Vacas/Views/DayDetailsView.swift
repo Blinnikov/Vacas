@@ -84,7 +84,7 @@ struct DayDetailsView: View {
       else {
         ScheduleRecordView(record: record) { r in
           alertShown = true
-  //        confirmationDialogShown = true
+//          confirmationDialogShown = true
           itemToDelete = r
         }
         .alert(warningTitle, isPresented: $alertShown) {
@@ -112,7 +112,7 @@ struct DayDetailsView: View {
             .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
             .swipeActions(edge: .trailing) {
               Button(role: .destructive) {
-                //              alertShown = true
+//                alertShown = true
                 confirmationDialogShown = true
                 itemToDelete = record
               } label: {

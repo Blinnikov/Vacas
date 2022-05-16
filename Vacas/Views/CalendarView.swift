@@ -40,9 +40,9 @@ struct CalendarView: View {
         .padding(.vertical)
       }
     }
-//    .safeAreaInset(edge: .bottom) {
-//      buttons
-//    }
+    //    .safeAreaInset(edge: .bottom) {
+    //      buttons
+    //    }
   }
   
   func CardView(dayItem: DayItem) -> some View {

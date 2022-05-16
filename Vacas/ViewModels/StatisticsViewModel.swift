@@ -21,7 +21,7 @@ class StatisticsViewModel: ObservableObject {
   init(with settingStore: SettingsStore, and recordsStore: ScheduleRecordsStore) {
     self.settingsStore = settingStore
     self.recordsStore = recordsStore
-  
+    
     // NOTE: It's a hack to make nested `ObservableObject`s work.
     // It just subscribes to nested object change event and rethrows updates further.
     // Thanks to https://stackoverflow.com/questions/58406287/how-to-tell-swiftui-views-to-bind-to-nested-observableobjects

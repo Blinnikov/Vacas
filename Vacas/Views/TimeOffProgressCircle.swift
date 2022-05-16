@@ -29,7 +29,7 @@ struct TimeOffProgressCircle: View {
 }
 
 struct TimeOffProgressCircle_Previews: PreviewProvider {
-    static var previews: some View {
-      TimeOffProgressCircle(color: .red, progress: 0.5)
-    }
+  static var previews: some View {
+    TimeOffProgressCircle(color: .red, progress: 0.5)
+  }
 }
