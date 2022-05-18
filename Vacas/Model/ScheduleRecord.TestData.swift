@@ -31,5 +31,8 @@ extension ScheduleRecord {
     ScheduleRecord(title: "Show more test 05", date: Date.from("2022-04-03"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Show more test 06", date: Date.from("2022-04-03"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Show more test 07", date: Date.from("2022-04-03"), type: .timeOff(.vacation)),
+    
+    ScheduleRecord(title: "International Workers' Day", date: Date.from("2022-05-01"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Victory Day", date: Date.from("2022-05-09"), type: .timeOff(.holiday)),
   ]
 }
