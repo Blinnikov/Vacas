@@ -32,10 +32,9 @@ extension ScheduleRecord {
     ScheduleRecord(title: "Show more test 06", date: Date.from("2022-04-03"), type: .timeOff(.vacation)),
     ScheduleRecord(title: "Show more test 07", date: Date.from("2022-04-03"), type: .timeOff(.vacation)),
     
-    ScheduleRecord(title: "International Workers' Day", date: Date.from("2022-05-01"), type: .timeOff(.holiday)),
-    ScheduleRecord(title: "International Workers' Day Observance", date: Date.from("2022-05-02"), type: .timeOff(.holiday)),
-    ScheduleRecord(title: "International Workers' Day Observance", date: Date.from("2022-05-03"), type: .timeOff(.holiday)),
-    ScheduleRecord(title: "Victory Day", date: Date.from("2022-05-08"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Day of Spring and Labor", date: Date.from("2022-05-01"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Public Holiday", date: Date.from("2022-05-02"), type: .timeOff(.holiday)),
+    ScheduleRecord(title: "Day of Spring and Labor Holiday", date: Date.from("2022-05-03"), type: .timeOff(.holiday)),
     ScheduleRecord(title: "Victory Day", date: Date.from("2022-05-09"), type: .timeOff(.holiday)),
   ]
 }
