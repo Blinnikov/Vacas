@@ -38,7 +38,7 @@ class ScheduleRecordsStore: ObservableObject {
     
     if records.isEmpty {
       print("using built-in records")
-      records = ScheduleRecord.testData
+      records = ScheduleRecord.loadInitialData(for: 2022, includeTestData: true)
     } else {
       print("successfully loaded records from UserDefaults: \(records)")
     }

@@ -8,7 +8,15 @@
 import Foundation
 
 extension ScheduleRecord {
-  static let testData = nationalHolidays + vacations + forTesting
+  static func loadInitialData(for year: Int, includeTestData: Bool = false) -> [ScheduleRecord] {
+    // TODO: Add some filtration by year in the future in case we have records not only for 2022
+    var result = nationalHolidays
+    if includeTestData {
+      result += vacations + forTesting
+    }
+    
+    return result
+  }
   
   private static let nationalHolidays = [
     ScheduleRecord(title: "New Year's Day", date: Date.from("2022-01-01"), type: .timeOff(.holiday)),
