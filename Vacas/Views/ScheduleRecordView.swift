@@ -28,7 +28,7 @@ struct ScheduleRecordView: View {
         Text(record.date.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
         Spacer()
         
-        if let onDelete = onDelete {
+        if let onDelete {
           Button {
             onDelete(record)
           } label: {

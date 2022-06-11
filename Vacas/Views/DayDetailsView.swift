@@ -139,7 +139,7 @@ struct DayDetailsView: View {
   @ViewBuilder
   func alertButtons() -> some View {
     Button("Delete", role: .destructive) {
-      if let itemToDelete = itemToDelete {
+      if let itemToDelete {
         // TODO: `withAnimation` doesn't work alongside with `Task`, need to workaround this
         withAnimation {
           hideRecord(itemToDelete)
